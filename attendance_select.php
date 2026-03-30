@@ -16,7 +16,7 @@ $f_section = $_GET['f_section'] ?? 'A';
 $days_in_month = cal_days_in_month(CAL_GREGORIAN, $f_month, $f_year);
 
 // 2. Bachon ki list fetch karo
-$students = mysqli_query($conn, "SELECT scholar_no, student_name FROM admissions WHERE student_class='$f_class' AND section='$f_section' ORDER BY scholar_no ASC");
+$students = mysqli_query($conn, "SELECT scholar_no, student_name FROM newadmissions WHERE student_class='$f_class' AND section='$f_section' ORDER BY scholar_no ASC");
 
 // Classes List for Dropdown
 $all_classes = ['Nursery', 'KG1', 'KG2', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th','9th','10th'];
