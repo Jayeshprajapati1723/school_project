@@ -1,0 +1,2 @@
+id,employee_id,serial_no,teacher_name,father_name,mobile_no,email,address,qualification,designation,date_of_joining,uan_no,pan_no,bank_acc_no,ifsc_code,salary,status,created_at
+1,1234,,"jayesh prajapti",,"s  prajapati",,,,TGT,,,,,,35000,Active,"2026-03-18 17:03:55"

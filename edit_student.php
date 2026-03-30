@@ -1,0 +1,165 @@
+<?php
+//session verify krna h jisse koi login h ya nhi chexk kr ske 
+include('auth.php');
+include('db.php');
+$has_sidebar= true;
+include('header.php') ;
+include('sidebar/sidebar.php'); 
+
+
+// 1. Data Fetch Logic
+if(isset($_GET['scholar_no'])) {
+    $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
+    $query = "SELECT * FROM admissions WHERE scholar_no = '$scholar'";
+    $res = mysqli_query($conn, $query);
+    $data = mysqli_fetch_assoc($res);
+    
+    if(!$data) { die("Student Not found!"); }
+}
+
+// 2. Update Logic (Isse Header se pehle rakhna best hai)
+if(isset($_POST['update_admission'])) {
+    $sname   = mysqli_real_escape_string($conn, $_POST['sname']);
+    $s_class = mysqli_real_escape_string($conn, $_POST['student_class']);
+    $section = mysqli_real_escape_string($conn, $_POST['section']);
+    $mobile  = mysqli_real_escape_string($conn, $_POST['mobile']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $cat     = mysqli_real_escape_string($conn, $_POST['cat']);
+    $relig   = mysqli_real_escape_string($conn, $_POST['religion']);
+
+    // Photo Update Logic
+    $final_photo = $data['photo_path']; 
+    if(!empty($_FILES['s_photo']['name'])) {
+        $pname = time() . "_" . $_FILES['s_photo']['name'];
+        $final_photo = "uploads/" . $pname;
+        move_uploaded_file($_FILES['s_photo']['tmp_name'], $final_photo);
+    }
+
+    $update_sql = "UPDATE admissions SET 
+        student_name = '$sname', 
+        student_class = '$s_class', 
+        section = '$section', 
+        mobile = '$mobile', 
+        address = '$address', 
+        category = '$cat', 
+        religion = '$relig',
+        photo_path = '$final_photo'
+        WHERE scholar_no = '$scholar'";
+
+    if(mysqli_query($conn, $update_sql)) {
+        // ALERT YAHAN HAI
+        echo "<script>alert('Data Updated Successfully!'); window.location='view_student.php?scholar_no=$scholar';</script>";
+        exit(); 
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+// 3. Layout Parts Include
+$has_sidebar = true ;
+include('header.php');
+include('sidebar.php');
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student | <?php echo $data['student_name']; ?></title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #f4f7f6; margin: 0; padding: 0; }
+        /* Sidebar ke saath space manage karne ke liye content wrapper */
+        .content-wrapper { margin-left: 260px; padding: 40px; } 
+        .edit-container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .row { display: flex; gap: 20px; margin-bottom: 15px; }
+        .col { flex: 1; display: flex; flex-direction: column; }
+        input, select, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-top: 5px; font-family: inherit; }
+        .btn-update { background: #f59e0b; color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 20px; width: 100%; transition: 0.3s; }
+        .btn-update:hover { background: #d97706; }
+    </style>
+</head>
+<body>
+
+<div class="content-wrapper">
+    <div class="edit-container">
+        <h2 style="color: #1a2a6c; margin-bottom: 20px;">✏️ Edit Student: <?php echo $data['student_name']; ?></h2>
+        
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col">
+                    <label>Student Name</label>
+                    <input type="text" name="sname" value="<?php echo $data['student_name']; ?>" required>
+                </div>
+                <div class="col">
+                    <label>Scholar No (Non-Editable)</label>
+                    <input type="text" value="<?php echo $data['scholar_no']; ?>" disabled style="background: #eee;">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Class</label>
+                    <select name="student_class">
+                        <option value="1st" <?php if($data['student_class'] == '1st') echo 'selected'; ?>>1st</option>
+                        <option value="2nd" <?php if($data['student_class'] == '2nd') echo 'selected'; ?>>2nd</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label>Section</label>
+                    <select name="section">
+                        <option value="A" <?php if($data['section'] == 'A') echo 'selected'; ?>>A</option>
+                        <option value="B" <?php if($data['section'] == 'B') echo 'selected'; ?>>B</option>
+                        <option value="C" <?php if($data['section'] == 'C') echo 'selected'; ?>>C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Mobile Number</label>
+                    <input type="text" name="mobile" value="<?php echo $data['mobile']; ?>">
+                </div>
+                <div class="col">
+                    <label>Category</label>
+                    <select name="cat">
+                        <option value="GEN" <?php if($data['category'] == 'GEN') echo 'selected'; ?>>GENERAL</option>
+                        <option value="OBC" <?php if($data['category'] == 'OBC') echo 'selected'; ?>>OBC</option>
+                        <option value="SC" <?php if($data['category'] == 'SC') echo 'selected'; ?>>SC</option>
+                        <option value="ST" <?php if($data['category'] == 'ST') echo 'selected'; ?>>ST</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Religion</label>
+                    <input type="text" name="religion" value="<?php echo $data['religion']; ?>">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Full Address</label>
+                    <textarea name="address" rows="2"><?php echo $data['address']; ?></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label>Update Photo</label>
+                    <input type="file" name="s_photo">
+                    <small style="color: blue;">Current: <?php echo $data['photo_path']; ?></small>
+                </div>
+            </div>
+
+            <button type="submit" name="update_admission" class="btn-update">Final Update Details</button>
+            <a href="view_student.php?scholar_no=<?php echo $scholar; ?>" style="text-align: center; display: block; margin-top: 15px; color: #666; text-decoration: none;">← Cancel Edit</a>
+        </form>
+    </div>
+</div>
+
+<?php include('footer.php'); ?>
+</body>
+</html>

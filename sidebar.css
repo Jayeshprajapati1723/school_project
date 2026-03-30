@@ -1,0 +1,65 @@
+/* Sidebar Main Style */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: #1a2a6c;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    color: white;
+}
+
+.sidebar-header h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Navigation Links */
+.nav-list { list-style: none; padding: 0; margin: 0; }
+
+.nav-list li a, .dropdown-btn {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #f1f1f1;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+}
+
+.nav-list li a:hover, .dropdown-btn:hover {
+    background-color: #2a3a8c;
+}
+
+.icon-right { float: right; }
+
+/* Dropdown Container */
+.dropdown-container {
+    display: none;
+    background-color: #111d4a;
+    padding-left: 15px;
+}
+
+.dropdown-container a {
+    padding: 10px 20px;
+    font-size: 14px !important;
+}
+
+/* Active Dropdown */
+.active-dropdown {
+    background-color: #2a3a8c;
+}
+/* Jab sidebar close ho toh margin zero ho jaye */
+.main-container.active {
+    margin-left: 0;
+}
