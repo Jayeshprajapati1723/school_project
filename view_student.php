@@ -57,7 +57,9 @@ include('sidebar.php');
                 <div class="details-grid">
                     
                     <div class="section-title">👤 Personal Details</div>
-                    <div class="detail-item"><label>Date of Birth (Fig)</label><span><?php echo $data['dob_figure']; ?></span></div>
+                    <div class="detail-item"><label>Date of Birth (Fig)</label><span><?php echo date("d-m-Y", strtotime($data['dob_figure']));
+                    ?></span></div> 
+                    <!-- function use kiya formate change krne k liye echo date("d-m-Y", strtotime () -->
                     <div class="detail-item" style="grid-column: span 2;"><label>Date of Birth (Words)</label><span><?php echo $data['dob_words']; ?></span></div>
                     <div class="detail-item"><label>Gender</label><span><?php echo $data['gender']; ?></span></div>
                     <div class="detail-item"><label>Religion</label><span><?php echo $data['religion']; ?></span></div>
