@@ -16,9 +16,9 @@ if(isset($_GET['scholar_no'])) {
     header("Location:dash.php"); 
     exit();
 }
-$has_sidebar = true ; // menu button lane k liye
+// $has_sidebar = true ; // menu button lane k liye
 include('header.php');
-include('sidebar.php'); 
+// include('sidebar.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include('sidebar.php');
 <div class="main-wrapper">
     <div class="container">
         <div class="btn-row">
-            <a href="../dashboard/dash.php" class="btn btn-back">← Back to Dashboard</a>
+            <a href="dash.php" class="btn btn-back">←- Back to Dashboard</a>
             <div>
                 <button onclick="window.print()" class="btn btn-print">🖨️ Print Profile</button>
             </div>

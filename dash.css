@@ -1,7 +1,7 @@
 /* Dashboard Main Content Layout */
 .dashboard-content {
     padding: 20px;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .dash-header {
@@ -17,8 +17,8 @@
 }
 
 .btn-backup {
-    background: #475569; 
-    color: white; 
+    background: lab(3.09% 0.28 0.1); 
+    color: #0af680; 
     padding: 10px 20px; 
     border-radius: 8px; 
     text-decoration: none; 
@@ -86,7 +86,7 @@ td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
 
 .bold-text { font-weight: 700; }
 .class-badge { background: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.view-link { color: #2575fc; text-decoration: none; font-weight: 600; }
+.view-link { color: oklab(63.21600000000001% 0.24992 0.02078); text-decoration: none; font-weight: 600; }
 .no-data { text-align: center; padding: 30px; color: #94a3b8; }
 
 .footer-credit { text-align: center; margin-top: 30px; font-size: 12px; color: #94a3b8; }

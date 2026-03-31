@@ -79,22 +79,26 @@ $total_classes = $class_data['total_classes'] ?? 0;
                 
                 <input type="text" name="search" placeholder="Name/ID/Aadhar" value="<?= htmlspecialchars($search) ?>">
                 
-                <select name="f_class">
-                    <option value="">Classes</option>
-                    <?php 
-                    $classes = mysqli_query($conn, "SELECT DISTINCT class_name FROM fees_master");
-                    while($c = mysqli_fetch_assoc($classes)) {
-                        $sel = ($f_class == $c['class_name']) ? 'selected' : '';
-                        echo "<option value='".$c['class_name']."' $sel>".$c['class_name']."</option>";
-                    }
-                    ?>
-                </select>
+<select name="student_class">
+    <option value="">-- Select Class --</option>
+    <?php 
+    // Wahi standard array jo logic file mein banayi thi
+    $all_classes = ['Nursery', 'KG-1', 'KG-2', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
+
+    foreach($all_classes as $cls) {
+        // Check kar rahe hain ki filter mein kaunsi class select hui hai
+        $selected = ($student_class == $cls) ? 'selected' : '';
+        echo "<option value='$cls' $selected>$cls</option>";
+    }
+    ?>
+</select>
 
                 <select name="f_section">
                     <option value="">Section</option>
                     <option value="A" <?= ($f_section=='A'?'selected':'') ?>>A</option>
                     <option value="B" <?= ($f_section=='B'?'selected':'') ?>>B</option>
-                    
+                   <option value="C" <?= ($f_section=='C'?'selected':'') ?>>C</option>     
+                   <option value="D" <?= ($f_section=='D'?'selected':'') ?>>D</option>
                 </select>
 
                 <select name="f_gender">
