@@ -14,12 +14,11 @@ CREATE TABLE IF NOT EXISTS users (
 <?php
 // PHP Session start for captcha validation
 session_start();
-// include('auth.php');
 include('db.php');
-
-
-
-
+include('auth.php');
+$has_sidebar = true ;
+include('header.php') ;
+include('sidebar.php') ;
 // 1. Captcha Generate karna (Naye Numbers generate honge har bar)
 if (!isset($_POST['signup_btn'])) {
     $_SESSION['captcha_num1'] = rand(1, 9);
@@ -166,5 +165,5 @@ if(isset($_POST['signup_btn'])) {
         </p>
     </div>
 </body>
-</html>
 <?php include('footer.php') ; ?>
+</html>

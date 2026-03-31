@@ -12,6 +12,7 @@ body {
 /* .main-container { */
     .main-container {
     margin-left: 0px; 
+    margin-top: 0px; 
     /* Sidebar ke liye jagah */
     padding: 25px 20px;
     display: flex;         /* Flexbox enable kiya */

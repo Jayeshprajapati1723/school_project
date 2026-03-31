@@ -16,7 +16,7 @@ if(isset($_GET['scholar_no'])) {
     header("Location:dash.php"); 
     exit();
 }
-
+$has_sidebar = true ; // menu button lane k liye
 include('header.php');
 include('sidebar.php'); 
 ?>

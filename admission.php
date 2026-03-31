@@ -217,7 +217,7 @@ $result = mysqli_query($conn, $query);
                 <!-- add now 23march 26 
                  add also add in the db -->
                   <div class="col">
-                    <label>2.   A/C Holder Name <span style="color:red;">*</span></label>
+                    <label>2.   A/C Holder Name <span style="color:red;"></span></label>
                     <input type="text" name="ac_holdername" style="text-transform:uppercase;" >
                 </div>
                 <div class="col">

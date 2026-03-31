@@ -22,7 +22,9 @@
                 <select name="class" style="width: 100%; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px;">
                     <option>Play Group</option>
                     <option>Nursery</option>
-                    <option>LKG / UKG</option>
+                    <option>KG1</option>
+                                        <option>KG2</option>
+
                     <option >1st</option>
                                         <option>1st</option>
                     <option>2nd</option>
@@ -32,6 +34,9 @@
                     <option>6th</option>
                     <option>7th</option>
                     <option>8th</option>
+                    <option>9th</option>
+                    <option>10th</option>
+
                 </select>
             </div>
             <button type="submit" style="width: 100%; padding: 15px; background: #2575fc; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Send Enquiry</button>
