@@ -47,6 +47,6 @@ foreach($tables as $table) {
 }
 
 // 4. Redirect back to dashboard with a success status
-header("Location: ../admin_dashboard.php?backup=success&path=" . urlencode($backup_dir));
+header("Location: ../dash.php?backup=success&path=" . urlencode($backup_dir));
 exit();
 ?>

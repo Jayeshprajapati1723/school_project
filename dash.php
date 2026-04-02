@@ -56,7 +56,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
         <div class="dash-header">
             <h1>📊 Dashboard Overview</h1>
             <div class="header-actions">
-                <a href="backupfolder/full_backup_modular.php" class="btn-backup">
+                <a href="backup/full_backup_modular.php" class="btn-backup">
                    <i class="fa fa-database"></i> Backup Data
                 </a>
             </div>
@@ -129,7 +129,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
 
                 <div class="form-actions">
                     <button type="submit" class="btn-apply">Apply</button>
-                    <a href="admin_dashboard.php" class="btn-reset">Reset</a>
+    <!-- //filechanges -->
+                    <a href="dash.php" class="btn-reset">Reset</a>
                 </div>
             </form>
         </div>
@@ -141,7 +142,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
                         <th>Scholar ID</th>
                         <th>Student Name</th>
                         <th>Class</th>
-                        <th>Action</th>
+                        <th>Section<th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -151,7 +153,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
                             <td class="bold-text"><?= $row['scholar_no'] ?></td>
                             <td><?= strtoupper($row['student_name']) ?></td>
                             <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
-                            <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
+                            <td><span 
+                            class="section"><?= $row['section'] ?></span></td> <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>

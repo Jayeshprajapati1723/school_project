@@ -34,7 +34,7 @@ include('header.php');
 <div class="main-wrapper">
     <div class="container">
         <div class="btn-row">
-            <a href="dash.php" class="btn btn-back">←- Back to Dashboard</a>
+            <a href="dash.php" class="btn btn-back"><< Back to Dashboard</a>
             <div>
                 <button onclick="window.print()" class="btn btn-print">🖨️ Print Profile</button>
             </div>
