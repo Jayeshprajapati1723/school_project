@@ -84,12 +84,12 @@
 }
 
 table { width: 100%; border-collapse: collapse; }
-th { padding: 12px; text-align: left; color: #64748b; font-size: 13px; background: #f8fafc; border-bottom: 2px solid #edf2f7; }
-td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+th { padding: 12px; text-align: center; color: hsl(240, 9%, 98%); font-size: 13px; background: #1a5590; border-bottom: 2px solid hsl(210, 75%, 5%); border: 2px solid black ;}
+td { padding: 12px; border-bottom: 1px solid #00070d;  text-align: center; border:2px solid #00070d;}
 
 .bold-text { font-weight: 700; }
 .class-badge { background: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.view-link { color: oklab(63.21600000000001% 0.24992 0.02078); text-decoration: none; font-weight: 600; }
+.view-link { color: oklch(72.108% 0.14611 242.378); text-decoration: none; font-weight: 600; }
 .no-data { text-align: center; padding: 30px; color: #94a3b8; }
 
 .footer-credit { text-align: center; margin-top: 30px; font-size: 12px; color: #94a3b8; }

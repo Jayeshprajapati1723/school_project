@@ -1,0 +1,37 @@
+//session coloum add alter table newadmissions 
+add  session varchar(10) not null AFTER scholar_no 
+
+add status 
+//alter table newadmissions 
+add  status varchar(10) not null AFTER SESSION
+
+// ADD DATE 
+alter table newadmissions add  admission_date DATE DEFAULT '2026-04-22' not null AFTER STATUS;
+
+//FORM M TEEEN CHIZE ADD KRNA H AB  
+                <!-- ADD SESSINON AND ADMISSION DATE  -->
+                <div class="col">
+                    <label>2. Session <span style="color:red;">*</span></label>
+                    <input type="text" name="session"style="text-transform:uppercase;" required>
+                </div>
+                              <div class="col">
+                    <label>2. Admission date  <span style="color:red;">*</span></label>
+                    <input type="date" name="admission date "style="text-transform:uppercase;" required>
+                </div>
+
+                //UPDATE  STATUS 
+                ALTER TABLE newadmissions 
+MODIFY STATUS VARCHAR(20) NOT NULL DEFAULT 'New';
+
+
+
+//CREATE TABLE fees_payments (
+    receipt_no INT AUTO_INCREMENT PRIMARY KEY,
+    scholar_no INT(11), 
+   installments int(5)  ,
+    deposit_amount DECIMAL(10,2),
+    discount DECIMAL(10,2) DEFAULT 0.00,
+    remaining DECIMAL(10,2),
+    date DATE,
+    payment_mode VARCHAR(20) -- Cash/Online
+);

@@ -139,17 +139,20 @@ $total_classes = $class_data['total_classes'] ?? 0;
             <table>
                 <thead>
                     <tr>
+                        <th><input id="allcheckbox" type="checkbox"    ></th>
                         <th>Scholar ID</th>
                         <th>Student Name</th>
                         <th>Class</th>
-                        <th>Section<th>
-                        <!-- <th>Action</th> -->
+                        <th>Section</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if(mysqli_num_rows($result) > 0): ?>
                         <?php while($row = mysqli_fetch_assoc($result)): ?>
                         <tr>
+                            <!-- yha dataselector mtlb h ki indiviucla box  -->
+                            <td><input class="dataselector" type="checkbox"  >  </td>
                             <td class="bold-text"><?= $row['scholar_no'] ?></td>
                             <td><?= strtoupper($row['student_name']) ?></td>
                             <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
@@ -165,6 +168,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
         </div>
         
         <!-- <p class="footer-credit">Developed by **JS Coder**</p> -->
+         <script src="dash.js" ></script>
     </div>
 </div>
 

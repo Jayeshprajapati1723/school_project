@@ -33,13 +33,22 @@ $result = mysqli_query($conn, $query);
                     <label>1. Scholar No <span style="color:red;">*</span></label>
                     <input type="number" name="scholar_no" required>
                 </div>
+                <!-- ADD SESSINON AND ADMISSION DATE  -->
                 <div class="col">
-                    <label>2. Student Name <span style="color:red;">*</span></label>
-                    <input type="text" name="student_name"style="text-transform:uppercase;" required>
+                    <label>2. Session <span style="color:red;">*</span></label>
+                    <input type="text" name="session"style="text-transform:uppercase;" required>
+                </div>
+          <div class="col">
+                    <label>2. Admission date  <span style="color:red;">*</span></label>
+                    <input type="date" name="admission_date"style="text-transform:uppercase;" required>
                 </div>
             </div>
 
             <div class="row">
+              <div class="col">
+                    <label>2. Student Name <span style="color:red;">*</span></label>
+                    <input type="text" name="student_name"style="text-transform:uppercase;" required>
+                </div>
                 <div class="col">
                     <label>3. DOB (Figure) <span style="color:red;">*</span></label>
                     <input type="date" name="dob_fig"
@@ -225,15 +234,16 @@ $result = mysqli_query($conn, $query);
                     <input type="text" name="bank_name" >
                 </div>
                 <div class="col">
-                    <label>21. Account No <span style="color:red;"></span></label>
-                    <input type="text" name="account_no" >
+                        <label>21. Account No <span style="color:red;"></span></label>
+                   <input type="text" name="account_no" >
                 </div>
                 <div class="col">
                     <label>22. IFSC Code <span style="color:red;"></span></label>
                     <input type="text" name="ifsc_code">
                 </div>
             </div>
-
+            
+                 
             <div class="fees-container">
                 <h3 class="fees-header"> Fees Details (Auto-Calculated)</h3>
                 <div class="col">
