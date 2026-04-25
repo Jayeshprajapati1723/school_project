@@ -2,12 +2,14 @@
     border : 2px solid black ;
   width: 50% ;
     margin: auto;
-    background-color: beige;
+    background-color: rgb(199, 220, 236);
     padding : 30px ;
 }
 p{
     color : rgb(237, 2, 2) ;
+    text-decoration: underline BLACK ;
 }
+
 
 H1{
 text-align: center;
@@ -23,7 +25,9 @@ h2 {
 form{
     display : flex ;
     flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
     /* overflow: auto; */
+    font-weight: 800;
 }
 input {
     border-radius: 2rem;
@@ -35,7 +39,7 @@ input {
 .btn{
     width: 200px ;
     height : 30px ;
-background-color: rgb(14, 11, 5);
+background-color: rgb(220, 162, 45);
     color : #62b5d9 ;
     align-self: center;
     margin : 10px ;
@@ -46,5 +50,5 @@ background-color: rgb(14, 11, 5);
     border: 2PX solid black;
     height : 30px ;
     width: auto;
-    background-color: red ;
+    background-color:white;
 }
