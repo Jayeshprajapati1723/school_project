@@ -35,3 +35,28 @@ MODIFY STATUS VARCHAR(20) NOT NULL DEFAULT 'New';
     date DATE,
     payment_mode VARCHAR(20) -- Cash/Online
 );
+
+http://localhost/fs_school/school_project/index.php
+//alter table fees_payments 
+add teacher_name varchar(100) not null after payment_mode ; 
+alter table fees_payments 
+add remarks  varchar(1000) not null after teacher_name ;
+
+. Database Connection (The Handshake)
+Connection ka matlab hai PHP aur MySQL ke beech ek rasta banana. Isme 4 cheezein hamesha fix rehti hain:
+
+Server: localhost
+
+User: root
+
+Password: "" (khali)
+
+Database: (Aapka DB name)
+
+PHP
+$conn = mysqli_connect("localhost", "root", "", "aapka_db");
+if(!$conn) { die("Lafda ho gaya connection mein!"); }
+Ye $conn ek variable nahi, ek active pipeline hai. Jab tak ye pipeline khuli hai, aap SQL query
+
+alter table fees_payments 
+add total_fees decimal(10,2) not null after scholar_no;

@@ -1,0 +1,50 @@
+.container {
+    border : 2px solid black ;
+  width: 50% ;
+    margin: auto;
+    background-color: beige;
+    padding : 30px ;
+}
+p{
+    color : rgb(237, 2, 2) ;
+}
+
+H1{
+text-align: center;
+text-decoration: underline;
+color : red ;
+font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+h2 {
+    text-align: center;
+    color : green ;
+}
+form{
+    display : flex ;
+    flex-direction: column;
+    /* overflow: auto; */
+}
+input {
+    border-radius: 2rem;
+    border : 2px solid black ;
+    height : 30px ;
+    text-indent: 12px ;
+    padding : 5px ;
+}
+.btn{
+    width: 200px ;
+    height : 30px ;
+background-color: rgb(14, 11, 5);
+    color : #62b5d9 ;
+    align-self: center;
+    margin : 10px ;
+    border-radius: 2rem;
+}
+
+.select{
+    border: 2PX solid black;
+    height : 30px ;
+    width: auto;
+    background-color: red ;
+}

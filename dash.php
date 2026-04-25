@@ -144,7 +144,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
                         <th>Student Name</th>
                         <th>Class</th>
                         <th>Section</th>
-                        <th>Action</th>
+                        <th>Profile</th>
+                        <th>Payments</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,6 +159,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
                             <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
                             <td><span 
                             class="section"><?= $row['section'] ?></span></td> <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
+                           <td><a href="fees.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">fees</a></td>
                         </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
