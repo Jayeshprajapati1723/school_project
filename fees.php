@@ -42,6 +42,13 @@ $check_res = mysqli_query($conn, $check_sql);
 if ($row = mysqli_fetch_assoc($check_res)) {
     $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
 }
+$next_installment = 1; // Default
+$inst_query = mysqli_query($conn, "SELECT installments FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
+$inst_data = mysqli_fetch_assoc($inst_query);
+
+if($inst_data) {
+    $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
+}
 ?>
 
 <link rel="stylesheet" href="fees.css">
@@ -62,7 +69,7 @@ if ($row = mysqli_fetch_assoc($check_res)) {
         <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
         <label>Installment No </label>
         <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
-            min='1'
+            min='1' value="<?= $next_installment ?>  " readonly
             required>
         <label>Date</label>
         <input type="date" name="date" placeholder="dd-mm-yyyy" required>

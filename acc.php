@@ -14,17 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_fees = $_POST['total_standard_fees'];
     $student_name = mysqli_real_escape_string($conn,$_POST['student_name']);
     $student_class =mysqli_real_escape_string($conn, $_POST['student_class']);
-$due_amt = (float)$_POST('due_amt') ;
+$due_amt = (float)$_POST['due_amt'] ;
 
+if($due_amt!=0) {
     $remaining_balance = $due_amt - ($deposit_amt+  $discount) ;
-
-    // 3. Database mein Insert karo
+        // 3. Database mein Insert karo
     $sql = "INSERT INTO fees_payments (
     scholar_no,   
     student_name ,
     student_class,
       installments,
       total_fees,
+      due_amt ,
        date, 
        deposit_amount,
         discount, 
@@ -36,7 +37,7 @@ $due_amt = (float)$_POST('due_amt') ;
             '$student_name',
             '$student_class',
              '$inst_no',
-            '$total_fees',
+            '$total_fees','$due_amt' ,
             '$date',
              '$deposit_amt', '
              $discount', 
@@ -45,7 +46,7 @@ $due_amt = (float)$_POST('due_amt') ;
              '$received_by', 
              '$remarks')";
 
-    if (mysqli_query($conn, $sql)) {
+                 if (mysqli_query($conn, $sql)) {
         $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
         echo "<script>
                 alert('Receipt Generated Successfully! No: $last_id');
@@ -54,5 +55,14 @@ $due_amt = (float)$_POST('due_amt') ;
     } else {
         echo "Error: " . mysqli_error($conn);
     }
+}else{
+    echo "<script>
+    alert('fees completed congratulations' )
+    </script>" ;
+}
+
+
+
+
 }
 ?>
