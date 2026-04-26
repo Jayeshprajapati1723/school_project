@@ -46,7 +46,7 @@ $next_installment = 1; // Default
 $inst_query = mysqli_query($conn, "SELECT installments FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
 $inst_data = mysqli_fetch_assoc($inst_query);
 
-if($inst_data) {
+if ($inst_data) {
     $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
 }
 ?>
@@ -62,31 +62,33 @@ if($inst_data) {
         <input type="number" value="<?= $scholar_no ?>"
             name="scholar_no" placeholder="auto generated" readonly required>
         <label>Student Name</label>
-        <input value="<?= $data['student_name'] ?>" readonly required  name="student_name">
-                <label>Father Name</label>
-        <input value="<?= $data['father_name'] ?>" readonly required  name="father_name">
+        <input value="<?= $data['student_name'] ?>" readonly required name="student_name">
+        <label>Father Name</label>
+        <input value="<?= $data['father_name'] ?>" readonly required name="father_name">
         <label>Class</label>
         <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
         <label>Installment No </label>
         <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
-            min='1' value="<?= $next_installment ?>  " readonly
+            min='1' value="<?= $next_installment ?>" readonly
             required>
         <label>Date</label>
         <input type="date" name="date" placeholder="dd-mm-yyyy" required>
         <label>Total Fee Amount</label>
         <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
-                <label> Total Due Amount</label>
+        <label> Total Due Amount</label>
         <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
         <label>Diposit amount </label>
         <input type="number" min="1" name="diposite_amt" placeholder="enter diposite amount here " required>
         <label>Discount </label>
         <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
             onchange="if(this.value < 0) this.value = 0;">
+            <label>Total Payable Amount</label>
+            <input  type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation "  required    >
         <label>Recieved by </label>
         <input type="text" name="recieved" placeholder="teacher/faculty " required>
         <label>Mode of payment </label>
         <!-- <input type="text" name="mode" placeholder="online/cash "required -->
-        <select class="select"  name="mode">
+        <select class="select" name="mode">
             <option>Cash</option>
             <option>Online</option>
         </select>
@@ -100,11 +102,17 @@ if($inst_data) {
 
         <button class="btn">Generate reciept </button>
     </form>
-
-
-
-
 </div>
 <script src="fees.js">
-    //        <label>Reciept No </label>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  //        <label>Reciept No </label>
     // <input type="number" value="auto gnerated" name="reciept_no" readonly style="background: #eee;">

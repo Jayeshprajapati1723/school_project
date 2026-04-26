@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_name = mysqli_real_escape_string($conn,$_POST['student_name']);
     $student_class =mysqli_real_escape_string($conn, $_POST['student_class']);
 $due_amt = (float)$_POST['due_amt'] ;
+$paid_amt = (float)$_POST['paid_amt'] ;
 
 if($due_amt!=0) {
     $remaining_balance = $due_amt - ($deposit_amt+  $discount) ;
@@ -29,6 +30,7 @@ if($due_amt!=0) {
        date, 
        deposit_amount,
         discount, 
+        paid_amt,
         remaining, 
         payment_mode, 
         teacher_name, 
@@ -40,7 +42,8 @@ if($due_amt!=0) {
             '$total_fees','$due_amt' ,
             '$date',
              '$deposit_amt', '
-             $discount', 
+             $discount',
+             '$paid_amt', 
              '$remaining_balance', 
              '$payment_mode', 
              '$received_by', 
@@ -57,7 +60,8 @@ if($due_amt!=0) {
     }
 }else{
     echo "<script>
-    alert('fees completed congratulations' )
+    alert('fees completed congratulations' ) ;
+    window.location.href = 'dash.php' ;
     </script>" ;
 }
 
@@ -66,3 +70,6 @@ if($due_amt!=0) {
 
 }
 ?>
+
+<!-- mysqli_insert_id($conn) Kya hai?
+Ye PHP ka ek inbuilt function hai jo database se kehta hai: "Bhai, abhi-abhi jo naya row (record) insert hua hai, uska Auto-Increment wala number (Primary Key) kya hai, wo mujhe batao." -->

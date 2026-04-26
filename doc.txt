@@ -79,3 +79,18 @@ add student_name varchar(100) not null after scholar_no ;
 
 alter table fees_payments 
 add student_class varchar(100) not null after student_name  ;
+
+ALTER table fees_payments 
+add paid_amt decimal(10,2) not null after before remaining ;
+
+ALTER table fees_payments 
+add paid_amt decimal(10,2) not null after discount ;
+
+🛠️ isset() ka Asli Kaam
+Ye function do cheezein check karta hai:
+
+Kya variable banaya (set) gaya hai?
+
+Kya uski value NULL toh nahi hai?
+
+Agar variable bana hua hai aur usme kuch bhi value hai (chahe wo 0, "" khali string, ya false hi kyun na ho), toh isset() kahega TRUE. Agar variable hai hi nahi ya usme NULL bhara hai, toh kahega FALSE.

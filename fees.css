@@ -46,6 +46,17 @@ input {
     text-indent: 12px ;
     padding : 5px ;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox ke liye */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .btn{
     width: 200px ;
     height : 30px ;
