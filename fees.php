@@ -1,6 +1,9 @@
 <?php
 include('db.php');
 
+// 1. Pehle ye decide kar lo ki 'Due' kya dikhana hai
+
+
 // URL se scholar_no uthao (agar hai toh)
 // or mene html m input m value - scholarno variable jo abhi bnaya h 
 
@@ -30,6 +33,15 @@ if (isset($_GET['scholar_no'])) {
     header("Location:dash.php");
     exit();
 }
+
+$due_amt = $data['total_standard_fees']; // By default full fees
+
+// 2. Ab check karo agar koi pichli payment hai
+$check_sql = "SELECT remaining FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
+$check_res = mysqli_query($conn, $check_sql);
+if ($row = mysqli_fetch_assoc($check_res)) {
+    $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
+}
 ?>
 
 <link rel="stylesheet" href="fees.css">
@@ -42,9 +54,10 @@ if (isset($_GET['scholar_no'])) {
         <label>Scholar No </label>
         <input type="number" value="<?= $scholar_no ?>"
             name="scholar_no" placeholder="auto generated" readonly required>
-
         <label>Student Name</label>
-        <input value="<?= $data['student_name'] ?>" readonly required>
+        <input value="<?= $data['student_name'] ?>" readonly required  name="student_name">
+                <label>Father Name</label>
+        <input value="<?= $data['father_name'] ?>" readonly required  name="father_name">
         <label>Class</label>
         <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
         <label>Installment No </label>
@@ -55,6 +68,8 @@ if (isset($_GET['scholar_no'])) {
         <input type="date" name="date" placeholder="dd-mm-yyyy" required>
         <label>Total Fee Amount</label>
         <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
+                <label> Total Due Amount</label>
+        <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
         <label>Diposit amount </label>
         <input type="number" min="1" name="diposite_amt" placeholder="enter diposite amount here " required>
         <label>Discount </label>
@@ -64,7 +79,7 @@ if (isset($_GET['scholar_no'])) {
         <input type="text" name="recieved" placeholder="teacher/faculty " required>
         <label>Mode of payment </label>
         <!-- <input type="text" name="mode" placeholder="online/cash "required -->
-        <select class="select">
+        <select class="select"  name="mode">
             <option>Cash</option>
             <option>Online</option>
         </select>

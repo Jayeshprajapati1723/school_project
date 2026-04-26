@@ -11,16 +11,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $remarks       = mysqli_real_escape_string($conn, $_POST['remarks']);
     $received_by   = mysqli_real_escape_string($conn, $_POST['recieved']);
     $inst_no       = (int)$_POST['installment_no'];
- $total_fees = $_POST['total_standard_fees'];
+    $total_fees = $_POST['total_standard_fees'];
+    $student_name = mysqli_real_escape_string($conn,$_POST['student_name']);
+    $student_class =mysqli_real_escape_string($conn, $_POST['student_class']);
+$due_amt = (float)$_POST('due_amt') ;
 
+    $remaining_balance = $due_amt - ($deposit_amt+  $discount) ;
 
-$remaining_balance = $total_fees ;
-$remaining_balance = $remaining_balance - $deposit_amt+ $discount ;
     // 3. Database mein Insert karo
-    $sql = "INSERT INTO fees_payments (scholar_no, installments,total_fees, date, deposit_amount, discount, remaining, payment_mode, teacher_name, remarks) 
-            VALUES ('$scholar_no', '$inst_no',
+    $sql = "INSERT INTO fees_payments (
+    scholar_no,   
+    student_name ,
+    student_class,
+      installments,
+      total_fees,
+       date, 
+       deposit_amount,
+        discount, 
+        remaining, 
+        payment_mode, 
+        teacher_name, 
+        remarks) 
+            VALUES ('$scholar_no',
+            '$student_name',
+            '$student_class',
+             '$inst_no',
             '$total_fees',
-            '$date', '$deposit_amt', '$discount', '$remaining_balance', '$payment_mode', '$received_by', '$remarks')";
+            '$date',
+             '$deposit_amt', '
+             $discount', 
+             '$remaining_balance', 
+             '$payment_mode', 
+             '$received_by', 
+             '$remarks')";
 
     if (mysqli_query($conn, $sql)) {
         $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
@@ -32,6 +55,4 @@ $remaining_balance = $remaining_balance - $deposit_amt+ $discount ;
         echo "Error: " . mysqli_error($conn);
     }
 }
-
-
 ?>

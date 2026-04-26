@@ -60,3 +60,22 @@ Ye $conn ek variable nahi, ek active pipeline hai. Jab tak ye pipeline khuli hai
 
 alter table fees_payments 
 add total_fees decimal(10,2) not null after scholar_no;
+
+alter table fees_payments 
+add due_amt decimal (10,2) not null AFTER total_fees ; 
+
+$due_amt = $data['total_standard_fees']; // By default full fees
+
+// 2. Ab check karo agar koi pichli payment hai
+$check_sql = "SELECT remaining FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
+$check_res = mysqli_query($conn, $check_sql);
+if ($row = mysqli_fetch_assoc($check_res)) {
+    $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
+}
+?>
+
+alter table fees_payments 
+add student_name varchar(100) not null after scholar_no ;
+
+alter table fees_payments 
+add student_class varchar(100) not null after student_name  ;
