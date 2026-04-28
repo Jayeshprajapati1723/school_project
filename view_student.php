@@ -18,7 +18,7 @@ if(isset($_GET['scholar_no'])) {
 }
 
 include('header.php');
-include('sidebar.php'); 
+// include('sidebar.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include('sidebar.php');
 <div class="main-wrapper">
     <div class="container">
         <div class="btn-row">
-            <a href="../dashboard/dash.php" class="btn btn-back">← Back to Dashboard</a>
+            <a href="dash.php" class="btn btn-back"><button>← Back to Dashboard</button></a>
             <div>
                 <button onclick="window.print()" class="btn btn-print">🖨️ Print Profile</button>
             </div>

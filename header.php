@@ -34,8 +34,10 @@
         <?php else: ?>
             <li><a href="login.php" style="background: #1a237e; color: white; padding: 7px 15px; border-radius: 5px;">Login</a></li>
         <?php endif; ?>
+   <button class="thbtn">Theme</button>
     </ul>
 </nav>
 
 <div id="main">
+    <script src="theme.js"></script>
     <script src="header.js"></script>

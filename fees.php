@@ -54,6 +54,8 @@ if ($inst_data) {
 <link rel="stylesheet" href="fees.css">
 
 <div class="container">
+                <a href="dash.php" class="btn btn-back"><button>← Back to Dashboard</button></a>
+
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
     <form action="acc.php" method="post">
