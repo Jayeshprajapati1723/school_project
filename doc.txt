@@ -94,3 +94,7 @@ Kya variable banaya (set) gaya hai?
 Kya uski value NULL toh nahi hai?
 
 Agar variable bana hua hai aur usme kuch bhi value hai (chahe wo 0, "" khali string, ya false hi kyun na ho), toh isset() kahega TRUE. Agar variable hai hi nahi ya usme NULL bhara hai, toh kahega FALSE.
+
+alter table fees_payments 
+add father_name varchar(50) not null after student_name 
+add mobile_no int(10) not null after father_name ;

@@ -1,14 +1,15 @@
 *{
     padding : 0% ;
     margin: 0%;
-    
+
+
 }
 .heading{
 text-align: center;
     color : rgb(5, 7, 7) ;
     font-family: 800;
-    text-decoration: underline;
-    
+    /* text-decoration: underline; */
+    margin: 0 auto ;
 }
 .rn{
     color : red ;
@@ -18,25 +19,35 @@ text-align: center;
 }
 
 .container {
-    position: relative;
-    margin-top: 50px ;
-    border : 2px solid black ; 
-    margin: auto;
-    display: flex;
-    background-color:white;
-    color: rgb(21, 16, 16) ;
-    padding : 20px ;
-    width: 800px ; height: 450px ; 
+    position : relative;
+    background-color: white ;
+    color: rgb(53, 53, 235) ;
+    border: 2px solid black ;
+
+    width: 793px; height: 350px;
+    margin:0 auto;
+    box-sizing: border-box;
     flex-wrap: wrap;
-        flex-direction: column;
-        align-content: center;
+}
+.containerslip {
+    background-color:white ;
+    color: black ;
+    padding: 20px ;
+    /* border: 2px solid black ; */
+    width: 750px ; height: 230px;
+    margin: auto;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 .frow{
-    display: flex; 
-    gap: 50px;
-    margin: 30px;
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-
+}
+.frow>div{
+    display: flex; 
+  flex: 1;
+  flex-direction: column;
 }
 
 .name{
@@ -50,4 +61,10 @@ text-align: center;
     .no-print {
         display: none;
     }
-}
+     }
+
+     .no-print{
+
+                    align-self: flex-end;
+background-color: rgb(146, 179, 146); color: black;
+     }

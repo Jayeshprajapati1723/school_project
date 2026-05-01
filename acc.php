@@ -12,17 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $received_by   = mysqli_real_escape_string($conn, $_POST['recieved']);
     $inst_no       = (int)$_POST['installment_no'];
     $total_fees = $_POST['total_standard_fees'];
-    $student_name = mysqli_real_escape_string($conn,$_POST['student_name']);
-    $student_class =mysqli_real_escape_string($conn, $_POST['student_class']);
-$due_amt = (float)$_POST['due_amt'] ;
-$paid_amt = (float)$_POST['paid_amt'] ;
+    $student_name = mysqli_real_escape_string($conn, $_POST['student_name']);
+    $student_class = mysqli_real_escape_string($conn, $_POST['student_class']);
+    $due_amt = (float)$_POST['due_amt'];
+    $paid_amt = (float)$_POST['paid_amt'];
+    $f_mob = $_POST['f_mob'];
+    $f_name = mysqli_real_escape_string($conn, $_POST['f_name']);
 
-if($due_amt!=0) {
-    $remaining_balance = $due_amt - ($deposit_amt+  $discount) ;
+    if ($due_amt != 0) {
+        $remaining_balance = $due_amt - ($deposit_amt +  $discount);
         // 3. Database mein Insert karo
-    $sql = "INSERT INTO fees_payments (
+        $sql = "INSERT INTO fees_payments (
     scholar_no,   
     student_name ,
+    father_name,
+    mobile_no,
     student_class,
       installments,
       total_fees,
@@ -37,6 +41,7 @@ if($due_amt!=0) {
         remarks) 
             VALUES ('$scholar_no',
             '$student_name',
+            '$f_name','$f_mob',
             '$student_class',
              '$inst_no',
             '$total_fees','$due_amt' ,
@@ -49,25 +54,21 @@ if($due_amt!=0) {
              '$received_by', 
              '$remarks')";
 
-                 if (mysqli_query($conn, $sql)) {
-        $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
-        echo "<script>
+        if (mysqli_query($conn, $sql)) {
+            $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
+            echo "<script>
                 alert('Receipt Generated Successfully! No: $last_id');
                 window.location.href = 'print_receipt.php?id=$last_id';
               </script>";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
     } else {
-        echo "Error: " . mysqli_error($conn);
-    }
-}else{
-    echo "<script>
+        echo "<script>
     alert('fees completed congratulations' ) ;
     window.location.href = 'dash.php' ;
-    </script>" ;
-}
-
-
-
-
+    </script>";
+    }
 }
 ?>
 

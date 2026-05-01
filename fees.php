@@ -1,5 +1,6 @@
 <?php
 include('db.php');
+$cdate = date('Y-m-d');
 
 // 1. Pehle ye decide kar lo ki 'Due' kya dikhana hai
 
@@ -25,7 +26,6 @@ if (isset($_GET['scholar_no'])) {
     $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'";
     $res = mysqli_query($conn, $query);
     $data = mysqli_fetch_assoc($res);
-
     if (!$data) {
         die("<h2 style='text-align:center; padding-top:50px;'>Student Not Found!</h2>");
     }
@@ -69,7 +69,7 @@ if ($inst_data) {
                     <input value="<?= $data['student_name'] ?>" readonly required name="student_name">
                 </div>
                 <div class="col"> <label>Father Name</label>
-                    <input value="<?= $data['father_name'] ?>" readonly required name="father_name">
+                    <input value="<?= $data['father_name'] ?>" readonly required name="f_name">
                 </div>
             </div>
             <div class="row">
@@ -83,10 +83,16 @@ if ($inst_data) {
                         required>
                 </div>
                 <div class="col"> <label>Date</label>
-                    <input type="date" name="date" placeholder="dd-mm-yyyy" required>
+                    <input type="date"
+                        value="<?= $cdate ?>"
+                        name="date" required>
                 </div>
             </div>
             <div class="row">
+                <div class="col"> <label>Contact</label>
+
+                    <input value="<?= $data['father_mobile'] ?>" name="f_mob" readonly>
+                </div>
                 <div> <label>Total Fee Amount
                     </label>
                     <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
@@ -97,16 +103,21 @@ if ($inst_data) {
             </div>
             <div class="row">
                 <div><label>Deposit amount </label>
-                    <input type="number" min="1" name="diposite_amt" placeholder="enter diposite amount here " required>
+                    <input type="number" min="1" name="diposite_amt"
+                        id="depo"
+                        placeholder="enter deposite amount here " required>
                 </div>
                 <div> <label>Discount </label>
                     <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
+                        id="disc"
                         onchange="if(this.value < 0) this.value = 0;">
                 </div>
             </div>
             <div class="row">
                 <div><label>Total Payable Amount</label>
-                    <input type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation " required>
+                    <input type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation "
+                        id="final_p"
+                        required readonly>
                 </div>
                 <div> <label>Recieved by </label>
                     <input type="text" name="recieved" placeholder="teacher/faculty " required>
@@ -138,6 +149,6 @@ if ($inst_data) {
     </form>
 </div>
 
-<script src="fees.js">
-    //        <label>Reciept No </label>
-    // <input type="number" value="auto gnerated" name="reciept_no" readonly style="background: #eee;">
+<script src="fees.js"></script>
+<!-- //        <label>Reciept No </label>
+    // <input type="number" value="auto gnerated" name="reciept_no" readonly style="background: #eee;"> -->

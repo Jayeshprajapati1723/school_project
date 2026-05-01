@@ -16,44 +16,67 @@ if (isset($_GET['id'])) {
 ?>
 <!-- link css file  -->
 <link rel="stylesheet" href="print_receipt.css">
+
 <div class="container">
-    <div class="rn">Receipt No : <?php echo $data['receipt_no']  ?></div>
+
     <div class="heading">
+
         <h2>Rainbow Kids School </h2>
         <h3>Scheme 51 INDORE ,MP</h3>
         <h4>Session 2026-2027</h4>
+
     </div>
-    <div class="frow">
-        <div class="name">Date :
-            <?php echo $data['date']  ?>
+    <div class="containerslip">
+        <div class="heading">
+            <h5><b>Reciept</b></h5>
         </div>
-        <div class="name">Scholar No : <?php echo $data['scholar_no']  ?></div>
-        <div class="name">Student Name :
-            <?php echo $data['student_name']  ?>
+        <div class="frow">
+            <div class="name">No : <?php echo $data['receipt_no']  ?></div>
+            <div class="name">Date :
+                <?php echo $data['date']  ?>
+            </div>
+            <div class="name">Scholar No : <?php echo $data['scholar_no']  ?></div>
         </div>
-    </div>
-    <div class="frow">
-        <div class="name">Total fees :
-            <?php echo $data['total_fees']  ?>
-        </div>
-        <div class="name">Due Amt. :
-            <?php echo $data['due_amt']  ?>
-        </div>
-        <div class="name">Diposited Amt. :
-            <?php echo $data['deposit_amount']  ?>
-        </div>
-    </div>
-    <div class="frow">
-        <div class="name">Discont Amt :
-            <?php echo $data['discount']  ?>
-        </div>
-        <div class="name"> Total Paid Amt.:
-            <?php echo $data['paid_amt']  ?>
+        <div class="frow">
+            <div class="name">
+                father name : <?php echo $data['father_name'] ?>
+            </div>
+            <div class="name">
+                mobile no : <?php echo $data['mobile_no'] ?>
+            </div>
+            <div class="name">
+                class : <?php echo $data['student_class'] ?>
+            </div>
         </div>
 
-        <div class="name">Remaining Amt :
-            <?php echo $data['remaining']  ?>
+
+        <div class="frow">
+            <div class="name">
+                Student Name :<?php echo $data['student_name']  ?>
+            </div>
+            <div class="name">Total fees :
+                <?php echo $data['total_fees']  ?>
+            </div>
+            <div class="name">Due Amt. :
+                <?php echo $data['due_amt']  ?>
+            </div>
+
         </div>
+        <div class="frow">
+            <div class="name">Deposited Amt. :
+                <?php echo $data['deposit_amount']  ?>
+            </div>
+            <div class="name"> Total Paid Amt.:
+                <?php echo $data['paid_amt']  ?>
+            </div>
+
+            <div class="name">Remaining Amt :
+                <?php echo $data['remaining']  ?>
+            </div>
+
+        </div>
+
     </div>
-<button class="no-print" onclick="window.print()">Print Receipt</button>
+    <div> <button class="no-print" onclick="window.print()">Print Receipt</button></div>
+
 </div>
