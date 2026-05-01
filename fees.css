@@ -4,9 +4,9 @@ body{
 
 .container {
     border : 2px solid black ;
-  width: 50% ;
+  width: 60% ;
     margin: auto;
-    background-color: rgb(199, 220, 236);
+    background-color: rgb(243, 243, 243);
     padding : 30px ;
 }
 p{
@@ -40,11 +40,12 @@ form{
     font-weight: 800;
 }
 input {
-    border-radius: 2rem;
+    /* border-radius: 2rem; */
     border : 2px solid black ;
     height : 30px ;
     text-indent: 12px ;
     padding : 5px ;
+    margin-left: 2px ;
 }
 
 input::-webkit-outer-spin-button,
@@ -58,13 +59,13 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 .btn{
-    width: 200px ;
-    height : 30px ;
-background-color: blue;
-    color :white ;
-    align-self: center;
-    margin : 10px ;
-    border-radius: 2rem;
+background-color: #2563eb; /* Blue */
+    color: white;
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    width: 130px ;
+    align-self: flex-end;
 }
 
 .select{
@@ -72,4 +73,35 @@ background-color: blue;
     height : 30px ;
     width: auto;
     background-color:white;
+}
+
+/* row ko style de rha hu yha se class =row h  */
+.prow{
+background-color: #ffffff; /* White background for form */
+    border: 1px solid #e2e8f0; /* Halka border */
+    border-radius: 8px; /* Thode soft corners */
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Halka shadow */
+}
+.row{
+    margin: auto;
+    row-gap: 10px ;
+    display: flex ;
+    flex-direction: row;
+    /* gap: 20px ; */
+ align-items: center;
+    flex-wrap: wrap;
+   
+    align-items: flex-end;
+  gap: 20px ;  
+}
+
+.row>div{
+    display: flex;
+    flex : 1 ;
+    flex-direction: column;
+}
+
+.btn:hover {
+    background-color: greenyellow; /* Darker blue on hover */
 }

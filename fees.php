@@ -54,67 +54,90 @@ if ($inst_data) {
 <link rel="stylesheet" href="fees.css">
 
 <div class="container">
-                <a href="dash.php" class="btn btn-back"><button>← Back to Dashboard</button></a>
+    <a href="dash.php" class="btn btn-back"><button>← Back to Dashboard</button></a>
 
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
     <form action="acc.php" method="post">
+        <div class="prow">
+            <div class="row">
+                <div class="col"> <label>Scholar No </label>
+                    <input type="number" value="<?= $scholar_no ?>"
+                        name="scholar_no" placeholder="auto generated" readonly required>
+                </div>
+                <div class="col"> <label>Student Name</label>
+                    <input value="<?= $data['student_name'] ?>" readonly required name="student_name">
+                </div>
+                <div class="col"> <label>Father Name</label>
+                    <input value="<?= $data['father_name'] ?>" readonly required name="father_name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"> <label>Class</label>
 
-        <label>Scholar No </label>
-        <input type="number" value="<?= $scholar_no ?>"
-            name="scholar_no" placeholder="auto generated" readonly required>
-        <label>Student Name</label>
-        <input value="<?= $data['student_name'] ?>" readonly required name="student_name">
-        <label>Father Name</label>
-        <input value="<?= $data['father_name'] ?>" readonly required name="father_name">
-        <label>Class</label>
-        <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
-        <label>Installment No </label>
-        <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
-            min='1' value="<?= $next_installment ?>" readonly
-            required>
-        <label>Date</label>
-        <input type="date" name="date" placeholder="dd-mm-yyyy" required>
-        <label>Total Fee Amount</label>
-        <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
-        <label> Total Due Amount</label>
-        <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
-        <label>Diposit amount </label>
-        <input type="number" min="1" name="diposite_amt" placeholder="enter diposite amount here " required>
-        <label>Discount </label>
-        <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
-            onchange="if(this.value < 0) this.value = 0;">
-            <label>Total Payable Amount</label>
-            <input  type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation "  required    >
-        <label>Recieved by </label>
-        <input type="text" name="recieved" placeholder="teacher/faculty " required>
-        <label>Mode of payment </label>
-        <!-- <input type="text" name="mode" placeholder="online/cash "required -->
-        <select class="select" name="mode">
-            <option>Cash</option>
-            <option>Online</option>
-        </select>
+                    <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
+                </div>
+                <div class="col"> <label>Installment No </label>
+                    <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
+                        min='1' value="<?= $next_installment ?>" readonly
+                        required>
+                </div>
+                <div class="col"> <label>Date</label>
+                    <input type="date" name="date" placeholder="dd-mm-yyyy" required>
+                </div>
+            </div>
+            <div class="row">
+                <div> <label>Total Fee Amount
+                    </label>
+                    <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
+                </div>
+                <div> <label> Total Due Amount</label>
+                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div><label>Deposit amount </label>
+                    <input type="number" min="1" name="diposite_amt" placeholder="enter diposite amount here " required>
+                </div>
+                <div> <label>Discount </label>
+                    <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
+                        onchange="if(this.value < 0) this.value = 0;">
+                </div>
+            </div>
+            <div class="row">
+                <div><label>Total Payable Amount</label>
+                    <input type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation " required>
+                </div>
+                <div> <label>Recieved by </label>
+                    <input type="text" name="recieved" placeholder="teacher/faculty " required>
+                </div>
 
-        <label>Remarks</label>
-        <input type="text" name="remarks" placeholder="remarks etc ">
-        <p>***NOTE***<br>
-            1 : All feilds are filled carefully and recheck again <br>
-            2 : Check correctly STUDENT NAME and its SCHOLAR NO and reconfirmed before generate reciept
-        </p>
+                <div> <label>Mode of payment </label>
+                    <!-- <input type="text" name="mode" placeholder="online/cash "required -->
+                    <select class="select" name="mode">
+                        <option>Cash</option>
+                        <option>Online</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Remarks</label>
+                    <input type="text" name="remarks" placeholder="remarks etc ">
+                </div>
+            </div>
+            <div class="row">
 
-        <button class="btn">Generate reciept </button>
+                <div>
+                    <p>***NOTE***<br>
+                        1 : All feilds are filled carefully and recheck again <br>
+                        2 : Check correctly STUDENT NAME and its SCHOLAR NO and reconfirmed before generate reciept
+                    </p>
+                </div>
+                <div> <button class="btn">Generate reciept </button></div>
+            </div>
+
     </form>
 </div>
-<script src="fees.js">
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  //        <label>Reciept No </label>
+<script src="fees.js">
+    //        <label>Reciept No </label>
     // <input type="number" value="auto gnerated" name="reciept_no" readonly style="background: #eee;">
