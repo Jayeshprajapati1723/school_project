@@ -1,4 +1,4 @@
-<?php 
+<?php
 // 1. Config, DB aur Auth ko include karne ka SAHI tarika
 include('db.php');
 include('auth.php');
@@ -8,9 +8,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // 3. Layout Components (Headers aur Sidebar)
-$has_sidebar = true; 
-include('header.php'); 
-include('sidebar.php'); 
+$has_sidebar = true;
+include('header.php');
+include('sidebar.php');
 
 // ... baki aapka logic (search, filters, table) ...
 
@@ -25,13 +25,27 @@ $f_pay     = mysqli_real_escape_string($conn, $_GET['f_pay'] ?? '');
 
 // Construct Dynamic SQL Where Clause
 $where = " WHERE 1=1";
-if(!empty($search))    { $where .= " AND (student_name LIKE '%$search%' OR scholar_no LIKE '%$search%' OR aadhar_no LIKE '%$search%')"; }
-if(!empty($f_class))   { $where .= " AND student_class = '$f_class'"; }
-if(!empty($f_section)) { $where .= " AND section = '$f_section'"; }
-if(!empty($f_gender))  { $where .= " AND gender = '$f_gender'"; }
-if(!empty($f_cat))     { $where .= " AND category = '$f_cat'"; }
-if(!empty($f_relig))   { $where .= " AND religion = '$f_relig'"; }
-if(!empty($f_pay))     { $where .= " AND payment_mode = '$f_pay'"; }
+if (!empty($search)) {
+    $where .= " AND (student_name LIKE '%$search%' OR scholar_no LIKE '%$search%' OR aadhar_no LIKE '%$search%')";
+}
+if (!empty($f_class)) {
+    $where .= " AND student_class = '$f_class'";
+}
+if (!empty($f_section)) {
+    $where .= " AND section = '$f_section'";
+}
+if (!empty($f_gender)) {
+    $where .= " AND gender = '$f_gender'";
+}
+if (!empty($f_cat)) {
+    $where .= " AND category = '$f_cat'";
+}
+if (!empty($f_relig)) {
+    $where .= " AND religion = '$f_relig'";
+}
+if (!empty($f_pay)) {
+    $where .= " AND payment_mode = '$f_pay'";
+}
 
 // Execute Final Data Query
 // new admissionn table 
@@ -52,12 +66,12 @@ $total_classes = $class_data['total_classes'] ?? 0;
 
 <div id="main">
     <div class="dashboard-content">
-        
+
         <div class="dash-header">
             <h1>📊 Dashboard Overview</h1>
             <div class="header-actions">
                 <a href="backup/full_backup_modular.php" class="btn-backup">
-                   <i class="fa fa-database"></i> Backup Data
+                    <i class="fa fa-database"></i> Backup Data
                 </a>
             </div>
         </div>
@@ -76,63 +90,63 @@ $total_classes = $class_data['total_classes'] ?? 0;
         <div class="filter-section">
             <h3>🔍 Filter Records</h3>
             <form method="GET" class="filter-form">
-                
+
                 <input type="text" name="search" placeholder="Name/ID/Aadhar" value="<?= htmlspecialchars($search) ?>">
-                
-<select name="student_class">
-    <option value="">-- Select Class --</option>
-<?php
-// 1. Check karo ki variable ka naam 'student_class' hai ya 'student_classes'
-// Maan lo humne upar se $student_class fetch kiya hai
-$student_class = isset($data['student_class']) ? $data['student_class'] : '';
 
-$all_classes = ['Nursery', 'KG-1', 'KG-2', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
+                <select name="student_class">
+                    <option value="">-- Select Class --</option>
+                    <?php
+                    // 1. Check karo ki variable ka naam 'student_class' hai ya 'student_classes'
+                    // Maan lo humne upar se $student_class fetch kiya hai
+                    $student_class = isset($data['student_class']) ? $data['student_class'] : '';
 
-foreach($all_classes as $cls) {
-    // Yahan maine variable sahi kar diya hai ($student_class)
-    $selected = ($student_class == $cls) ? 'selected' : '';
-    echo "<option value='$cls' $selected>$cls</option>";
-}
-?>
-</select>
+                    $all_classes = ['Nursery', 'KG-1', 'KG-2', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
+
+                    foreach ($all_classes as $cls) {
+                        // Yahan maine variable sahi kar diya hai ($student_class)
+                        $selected = ($student_class == $cls) ? 'selected' : '';
+                        echo "<option value='$cls' $selected>$cls</option>";
+                    }
+                    ?>
+                </select>
 
                 <select name="f_section">
                     <option value="">Section</option>
-                    <option value="A" <?= ($f_section=='A'?'selected':'') ?>>A</option>
-                    <option value="B" <?= ($f_section=='B'?'selected':'') ?>>B</option>
-                   <option value="C" <?= ($f_section=='C'?'selected':'') ?>>C</option>     
-                   <option value="D" <?= ($f_section=='D'?'selected':'') ?>>D</option>
+                    <option value="A" <?= ($f_section == 'A' ? 'selected' : '') ?>>A</option>
+                    <option value="B" <?= ($f_section == 'B' ? 'selected' : '') ?>>B</option>
+                    <option value="C" <?= ($f_section == 'C' ? 'selected' : '') ?>>C</option>
+                    <option value="D" <?= ($f_section == 'D' ? 'selected' : '') ?>>D</option>
                 </select>
 
                 <select name="f_gender">
                     <option value="">Gender</option>
-                    <option value="Male" <?= ($f_gender=='Male'?'selected':'') ?>>Male</option>
-                    <option value="Female" <?= ($f_gender=='Female'?'selected':'') ?>>Female</option>
+                    <option value="Male" <?= ($f_gender == 'Male' ? 'selected' : '') ?>>Male</option>
+                    <option value="Female" <?= ($f_gender == 'Female' ? 'selected' : '') ?>>Female</option>
                 </select>
 
                 <select name="f_cat">
                     <option value="">Category</option>
-                    <option value="GEN" <?= ($f_cat=='GEN'?'selected':'') ?>>GEN</option>
-                    <option value="OBC" <?= ($f_cat=='OBC'?'selected':'') ?>>OBC</option>
-                    <option value="SC" <?= ($f_cat=='SC'?'selected':'') ?>>SC</option>
-                    <option value="ST" <?= ($f_cat=='ST'?'selected':'') ?>>ST</option>
+                    <option value="GEN" <?= ($f_cat == 'GEN' ? 'selected' : '') ?>>GEN</option>
+                    <option value="OBC" <?= ($f_cat == 'OBC' ? 'selected' : '') ?>>OBC</option>
+                    <option value="SC" <?= ($f_cat == 'SC' ? 'selected' : '') ?>>SC</option>
+                    <option value="ST" <?= ($f_cat == 'ST' ? 'selected' : '') ?>>ST</option>
                 </select>
 
                 <select name="f_relig">
                     <option value="">Religion</option>
-                    <option value="Hindu" <?= ($f_relig=='Hindu'?'selected':'') ?>>Hindu</option>
-                    <option value="Muslim" <?= ($f_relig=='Muslim'?'selected':'') ?>>Muslim</option>
+                    <option value="Hindu" <?= ($f_relig == 'Hindu' ? 'selected' : '') ?>>Hindu</option>
+                    <option value="Muslim" <?= ($f_relig == 'Muslim' ? 'selected' : '') ?>>Muslim</option>
                 </select>
 
                 <select name="f_pay">
                     <option value="">Payment</option>
-                    <option value="Cash" <?= ($f_pay=='Cash'?'selected':'') ?>>Cash</option>
-                    <option value="Online" <?= ($f_pay=='Online'?'selected':'') ?>>Online</option>
+                    <option value="Cash" <?= ($f_pay == 'Cash' ? 'selected' : '') ?>>Cash</option>
+                    <option value="Online" <?= ($f_pay == 'Online' ? 'selected' : '') ?>>Online</option>
                 </select>
 
                 <div class="form-actions">
                     <button type="submit" class="btn-apply">Apply</button>
-    <!-- //filechanges -->
+                    <!-- //filechanges -->
                     <a href="dash.php" class="btn-reset">Reset</a>
                 </div>
             </form>
@@ -142,7 +156,7 @@ foreach($all_classes as $cls) {
             <table>
                 <thead>
                     <tr>
-                        <th><input id="allcheckbox" type="checkbox"    ></th>
+                        <th><input id="allcheckbox" type="checkbox"></th>
                         <th>Scholar ID</th>
                         <th>Student Name</th>
                         <th>Class</th>
@@ -152,28 +166,31 @@ foreach($all_classes as $cls) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(mysqli_num_rows($result) > 0): ?>
-                        <?php while($row = mysqli_fetch_assoc($result)): ?>
-                        <tr>
-                            <!-- yha dataselector mtlb h ki indiviucla box  -->
-                            <td><input class="dataselector" type="checkbox"  >  </td>
-                            <td class="bold-text"><?= $row['scholar_no'] ?></td>
-                            <td><?= strtoupper($row['student_name']) ?></td>
-                            <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
-                            <td><span 
-                            class="section"><?= $row['section'] ?></span></td> <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
-                           <td><a href="fees.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">fees</a></td>
-                        </tr>
+                    <?php if (mysqli_num_rows($result) > 0): ?>
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                            <tr>
+                                <!-- yha dataselector mtlb h ki indiviucla box  -->
+                                <td><input class="dataselector" type="checkbox"> </td>
+                                <td class="bold-text"><?= $row['scholar_no'] ?></td>
+                                <td><?= strtoupper($row['student_name']) ?></td>
+                                <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
+                                <td><span
+                                        class="section"><?= $row['section'] ?></span></td>
+                                <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
+                                <td><a href="fees.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">fees</a></td>
+                            </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="4" class="no-data">No matching records found.</td></tr>
+                        <tr>
+                            <td colspan="4" class="no-data">No matching records found.</td>
+                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
-        
+
         <!-- <p class="footer-credit">Developed by **JS Coder**</p> -->
-         <script src="dash.js" ></script>
+        <script src="dash.js"></script>
     </div>
 </div>
 

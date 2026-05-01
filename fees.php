@@ -1,6 +1,7 @@
 <?php
 include('db.php');
 $cdate = date('Y-m-d');
+include('feeshist.php');//fees history .php
 
 // 1. Pehle ye decide kar lo ki 'Due' kya dikhana hai
 
