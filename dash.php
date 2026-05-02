@@ -93,7 +93,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
 
                 <input type="text" name="search" placeholder="Name/ID/Aadhar" value="<?= htmlspecialchars($search) ?>">
 
-                <select name="student_class">
+                <select name="f_class">
                     <option value="">-- Select Class --</option>
                     <?php
                     // 1. Check karo ki variable ka naam 'student_class' hai ya 'student_classes'
@@ -163,6 +163,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
                         <th>Section</th>
                         <th>Profile</th>
                         <th>Payments</th>
+                        <th>Fess History</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -178,11 +179,13 @@ $total_classes = $class_data['total_classes'] ?? 0;
                                         class="section"><?= $row['section'] ?></span></td>
                                 <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
                                 <td><a href="fees.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">fees</a></td>
+                                   <td><a href="feeshist.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">History</a></td>
                             </tr>
+
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="no-data">No matching records found.</td>
+                           <div> <td colspan="4" class="not">No matching records found.</td></div>
                         </tr>
                     <?php endif; ?>
                 </tbody>
