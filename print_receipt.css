@@ -1,8 +1,6 @@
 *{
-    padding : 0% ;
-    margin: 0%;
-
-
+    padding : 0 ;
+    margin: 0;
 }
 .heading{
 text-align: center;
@@ -22,12 +20,17 @@ text-align: center;
     position : relative;
     background-color: white ;
     color: rgb(53, 53, 235) ;
-    border: 2px solid black ;
+    border: .2px solid black ;
 
-    width: 793px; height: 350px;
+    width: 795px; height: 350px;
     margin:0 auto;
     box-sizing: border-box;
     flex-wrap: wrap;
+}
+.sign{
+    display: flex;
+  position: relative;
+  left: 660px;
 }
 .containerslip {
     background-color:white ;
@@ -66,5 +69,5 @@ text-align: center;
      .no-print{
 
                     align-self: flex-end;
-background-color: rgb(146, 179, 146); color: black;
+background-color : white ; color: rgb(1, 4, 0);
      }

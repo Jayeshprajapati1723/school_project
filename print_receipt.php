@@ -1,7 +1,12 @@
 <?php
+include('auth.php') ;
+// include('header.php');
+$has_sidebar =true ;
+// include('sidebar.php') ;
 include('db.php');
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id'])) { //sidha adress bar se catch
+    $id = $_GET['id'] ;//hmne id catch ki feehist se 
     $id = mysqli_real_escape_string($conn, $_GET['id']);
     $query = "SELECT * FROM fees_payments WHERE receipt_no = '$id'";
     $res = mysqli_query($conn, $query);
@@ -22,8 +27,8 @@ if (isset($_GET['id'])) {
     <div class="heading">
 
         <h2>Rainbow Kids School </h2>
-        <h3>Scheme 51 INDORE ,MP</h3>
-        <h4>Session 2026-2027</h4>
+        <h3>Scheme no 51 INDORE ,MP</h3>
+        <!-- <h4>Session 2026-2027</h4> -->
 
     </div>
     <div class="containerslip">
@@ -31,9 +36,9 @@ if (isset($_GET['id'])) {
             <h5><b>Reciept</b></h5>
         </div>
         <div class="frow">
-            <div class="name">No : <?php echo $data['receipt_no']  ?></div>
+            <div class="name">Rec/No : <?php echo $data['receipt_no']  ?></div>
             <div class="name">Date :
-                <?php echo $data['date']  ?>
+                <?php echo date('d-m-Y',strtotime($data['date']))  ?>
             </div>
             <div class="name">Scholar No : <?php echo $data['scholar_no']  ?></div>
         </div>
@@ -75,8 +80,8 @@ if (isset($_GET['id'])) {
             </div>
 
         </div>
+<div class="sign"><H6>Authorized signature</H6></div>
 
     </div>
     <div> <button class="no-print" onclick="window.print()">Print Receipt</button></div>
-
 </div>

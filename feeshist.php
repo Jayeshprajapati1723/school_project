@@ -5,10 +5,9 @@ include('db.php');
 
 if (isset($_GET['scholar_no'])) {
     $scholar_no = mysqli_real_escape_string($conn, $_GET['scholar_no']);
-    $query = "SELECT * FROM fees_payments WHERE scholar_no = '$scholar_no'";
+    $query = "SELECT * FROM fees_payments WHERE scholar_no = '$scholar_no'ORDER BY receipt_no DESC";
     $res = mysqli_query($conn, $query);
-    $data = mysqli_fetch_assoc($res);
-    if (!$data) {
+    if (mysqli_num_rows($res) == 0) {
         die("<h2 style='text-align:center; padding-top:50px;'>Student Not Found!</h2>");
     }
 } else {
@@ -19,29 +18,36 @@ if (isset($_GET['scholar_no'])) {
 ?>
 <link rel="stylesheet" href="feeshist.css">
 
-<div class="maincoont">
+<div class="maincont">
     <h2>FESS HISTORY OF STUDENT </h2>
     <div>
         <table>
             <thead>
-                <tr>
+                <tr class="row">
                     <th>S.no</th>
+                    <th>Date</th>
                     <th>Name</th>
                     <th>Reciept No</th>
                     <th>Regenerate</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><?= $data['scholar_no'] ?></td>
-                
-                    <td><?= $data['student_name'] ?></td>
-                
-                    <td><?= $data['receipt_no'] ?></td>
-                    <td> <a href="print_receipt.php ?scholar_no=<?= $data['scholar_no'] ?>" >
-                    regenerate</a> 
-                </td>
-                </tr>
+                <?php
+                while ($data = mysqli_fetch_assoc($res)) {
+                ?>
+                    <tr class="col">
+                        <td><?= $data['scholar_no'] ?></td>
+                        <td><?= date(  'd-m-Y',strtotime($data['date']))?></td>
+                        <td><?= $data['student_name'] ?></td>
+
+                        <td><?= $data['receipt_no'] ?></td>
+                        <td> <a href="print_receipt.php?id=<?= $data['receipt_no'] ?>">
+                                regenerate</a>
+                        </td>
+                    </tr>
+                <?php
+
+                } ?>
             </tbody>
 
         </table>
