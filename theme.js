@@ -3,7 +3,7 @@ let istrue = 1 ;
 theme.addEventListener("click",()=> {  
 if(istrue==1) {
     document.body.style.backgroundColor = "black" ;
-    document.body.style.color = "blue" ;
+    document.body.style.color = "white" ;
     istrue =0 
 } else {
         document.body.style.backgroundColor = "white" ;

@@ -35,7 +35,6 @@ MODIFY STATUS VARCHAR(20) NOT NULL DEFAULT 'New';
     date DATE,
     payment_mode VARCHAR(20) -- Cash/Online
 );
-
 http://localhost/fs_school/school_project/index.php
 //alter table fees_payments 
 add teacher_name varchar(100) not null after payment_mode ; 
@@ -98,3 +97,25 @@ Agar variable bana hua hai aur usme kuch bhi value hai (chahe wo 0, "" khali str
 alter table fees_payments 
 add father_name varchar(50) not null after student_name 
 add mobile_no int(10) not null after father_name ;
+
+
+// ab bus table ka loigc or printign reciept 
+create TABLE bus_payments  (
+    receipt_no INT AUTO_INCREMENT PRIMARY KEY,
+    scholar_no INT(11), 
+    student_name varchar(50),
+    student_class varchar(50) ,
+    father_name varchar(50),
+    father_mobile varchar(12) ,
+    vehicle_no varchar(19),
+    month varchar (20),
+    year varchar (100) ,
+    total_bus_fare DECIMAL(10,2) ,
+    bus_deposit_amount DECIMAL(10,2),
+    total_payable decimal (10,2),
+    due_amt DECIMAL(10,2),
+    remaining DECIMAL(10,2),
+    date DATE,
+    payment_mode VARCHAR(20) ,
+remark varchar(100) 
+);

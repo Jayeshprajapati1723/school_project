@@ -1,5 +1,6 @@
 <?php
-include('db.php'); // Aapka database connection
+include('auth.php') ;
+ include('db.php'); // Aapka database connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 1. Inputs ko variables mein pakdo
@@ -22,44 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($due_amt != 0) {
         $remaining_balance = $due_amt - ($deposit_amt +  $discount);
         // 3. Database mein Insert karo
-        $sql = "INSERT INTO fees_payments (
-    scholar_no,   
-    student_name ,
-    father_name,
-    mobile_no,
-    student_class,
-      installments,
-      total_fees,
-      due_amt ,
-       date, 
-       deposit_amount,
-        discount, 
-        paid_amt,
-        remaining, 
-        payment_mode, 
-        teacher_name, 
-        remarks) 
-            VALUES ('$scholar_no',
-            '$student_name',
-            '$f_name','$f_mob',
-            '$student_class',
-             '$inst_no',
-            '$total_fees','$due_amt' ,
-            '$date',
-             '$deposit_amt', '
-             $discount',
-             '$paid_amt', 
-             '$remaining_balance', 
-             '$payment_mode', 
-             '$received_by', 
-             '$remarks')";
+        $sql = "INSERT INTO fees_payments (scholar_no,  student_name ,father_name, mobile_no,student_class, installments,total_fees,due_amt ,date,deposit_amount, discount,paid_amt,remaining, payment_mode,teacher_name, remarks) 
+            VALUES ('$scholar_no','$student_name','$f_name','$f_mob','$student_class', '$inst_no','$total_fees','$due_amt' ,'$date','$deposit_amt', '$discount','$paid_amt', '$remaining_balance', '$payment_mode','$received_by','$remarks')";
 
         if (mysqli_query($conn, $sql)) {
             $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
-            echo "<script>
-                alert('Receipt Generated Successfully! No: $last_id');
-                window.location.href = 'print_receipt.php?id=$last_id';
-              </script>";
+            header("Location: print_receipt.php?id=". $last_id);
+            exit();
         } else {
             echo "Error: " . mysqli_error($conn);
         }
@@ -70,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>";
     }
 }
+
 ?>
+
 
 <!-- mysqli_insert_id($conn) Kya hai?
 Ye PHP ka ek inbuilt function hai jo database se kehta hai: "Bhai, abhi-abhi jo naya row (record) insert hua hai, uska Auto-Increment wala number (Primary Key) kya hai, wo mujhe batao." -->

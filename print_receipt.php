@@ -1,12 +1,12 @@
 <?php
-include('auth.php') ;
+include('auth.php');
 // include('header.php');
-$has_sidebar =true ;
+$has_sidebar = true;
 // include('sidebar.php') ;
 include('db.php');
 
 if (isset($_GET['id'])) { //sidha adress bar se catch
-    $id = $_GET['id'] ;//hmne id catch ki feehist se 
+    $id = $_GET['id']; //hmne id catch ki feehist se 
     $id = mysqli_real_escape_string($conn, $_GET['id']);
     $query = "SELECT * FROM fees_payments WHERE receipt_no = '$id'";
     $res = mysqli_query($conn, $query);
@@ -36,9 +36,9 @@ if (isset($_GET['id'])) { //sidha adress bar se catch
             <h5><b>Reciept</b></h5>
         </div>
         <div class="frow">
-            <div class="name">Rec/No : <?php echo $data['receipt_no']  ?></div>
+            <div class="name">Rec/No : <?php echo "rbk/fees-". $data['receipt_no']  ?></div>
             <div class="name">Date :
-                <?php echo date('d-m-Y',strtotime($data['date']))  ?>
+                <?php echo date('d-m-Y', strtotime($data['date']))  ?>
             </div>
             <div class="name">Scholar No : <?php echo $data['scholar_no']  ?></div>
         </div>
@@ -80,7 +80,9 @@ if (isset($_GET['id'])) { //sidha adress bar se catch
             </div>
 
         </div>
-<div class="sign"><H6>Authorized signature</H6></div>
+        <div class="sign">
+            <H6>Authorized signature</H6>
+        </div>
 
     </div>
     <div> <button class="no-print" onclick="window.print()">Print Receipt</button></div>

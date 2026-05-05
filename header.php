@@ -32,7 +32,7 @@
             <?php if (isset($_SESSION['user_id'])): ?>
                 <li style="color: #15a2fa; font-size: 13px; font-weight: bold;">Welcome, <?php echo $_SESSION['full_name']; ?></li>
                 <li><a href="dash.php">Dashboard</a></li>
-                <li><a href="logout.php" style="color: #ff4d59;">Logout</a></li>
+                <li><a href="logout.php"style="color: #ff4d59;">Logout</a></li>
             <?php else: ?>
                 <li><a href="login.php" style="background: #1a237e; color: white; padding: 7px 15px; border-radius: 5px;">Login</a></li>
             <?php endif; ?>

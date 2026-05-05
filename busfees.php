@@ -1,33 +1,19 @@
 <?php
+$cdate = date('d-m-Y');
 include('db.php');
-include('auth.php');
-include('header.php') ;
-$cdate = date('Y-m-d');
-// include('feeshist.php');//fees history .php
-
-// 1. Pehle ye decide kar lo ki 'Due' kya dikhana hai
-
-
-// URL se scholar_no uthao (agar hai toh)
-// or mene html m input m value - scholarno variable jo abhi bnaya h 
-
-// <? get variable adress 
-
-$scholar_no = "";
+include('auth.php') ;
+include('header.php');
+//scholar no catch kro 
 if (isset($_GET['scholar_no'])) {
-    $scholar_no = $_GET['scholar_no'];
-}
-
-$student_name = "";
-if (isset($_GET['student_name'])) {
-    $student_name = $_GET['student_name'];
-}
-
-if (isset($_GET['scholar_no'])) {
+    $scholar = ($_GET['scholar_no']);
+    // scholarno ko rkha ek variable m 
     $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
-    // Table name correctly matched: newadmission
+    //querry m hmne bola select kro us scholar ko      
     $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'";
+    //res ek array jesa h store kr rha h fir 
     $res = mysqli_query($conn, $query);
+    //data ko hmne rkha h sari values nikalne k liye res yha fetch ho rha h 
+    //data ek m sbko fetch kra rhe h ek ek krke 
     $data = mysqli_fetch_assoc($res);
     if (!$data) {
         die("<h2 style='text-align:center; padding-top:50px;'>Student Not Found!</h2>");
@@ -36,38 +22,20 @@ if (isset($_GET['scholar_no'])) {
     header("Location:dash.php");
     exit();
 }
-
-$due_amt = $data['total_standard_fees']; // By default full fees
-
-// 2. Ab check karo agar koi pichli payment hai
-$check_sql = "SELECT remaining FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
-$check_res = mysqli_query($conn, $check_sql);
-if ($row = mysqli_fetch_assoc($check_res)) {
-    $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
-}
-$next_installment = 1; // Default
-$inst_query = mysqli_query($conn, "SELECT installments FROM fees_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
-$inst_data = mysqli_fetch_assoc($inst_query);
-
-if ($inst_data) {
-    $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
-}
 ?>
-
 <link rel="stylesheet" href="fees.css">
-
+<!-- //css whi rkhi h same as fees -->
 <div class="container">
     <a href="dash.php" class="btn btn-back"><button>Back to Dashboard</button></a>
-    <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
-    <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class='busfees'>🚌Bus Fee</a>
+    <a href="busfees.php" class='busfees'>🚌Bus Fee</a>
 
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
-    <form action="savefees.php" method="post">
+    <form action="acc.php" method="post">
         <div class="prow">
             <div class="row">
                 <div class="col"> <label>Scholar No </label>
-                    <input type="number" value="<?= $scholar_no ?>"
+                    <input type="number" value="<?= $scholar ?>"
                         name="scholar_no" placeholder="auto generated" readonly required>
                 </div>
                 <div class="col"> <label>Student Name</label>
@@ -82,11 +50,11 @@ if ($inst_data) {
 
                     <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
                 </div>
-                <div class="col"> <label>Installment No </label>
+                <!-- <div class="col"> <label>Installment No </label>
                     <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
                         min='1' value="<?= $next_installment ?>" readonly
                         required>
-                </div>
+                </div> -->
                 <div class="col"> <label>Date</label>
                     <input type="date"
                         value="<?= $cdate ?>"
@@ -98,25 +66,25 @@ if ($inst_data) {
 
                     <input value="<?= $data['father_mobile'] ?>" name="f_mob" readonly>
                 </div>
-                <div> <label>Total Fee Amount
+                <!-- <div> <label>Total Fee Amount
                     </label>
                     <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
+                </div> -->
+                <!-- <div> <label> Total Due Amount</label>
+                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
                 </div>
-                <div> <label> Total Due Amount</label>
-                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly id="due">
-                </div>
-            </div>
+            </div> -->
             <div class="row">
-                <div><label>Deposit amount </label>
+                <div><label> Bus Deposit amount </label>
                     <input type="number" min="1" name="diposite_amt"
                         id="depo"
                         placeholder="enter deposite amount here " required>
                 </div>
-                <div> <label>Discount </label>
+                <!-- <div> <label>Discount </label>
                     <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
                         id="disc"
                         onchange="if(this.value < 0) this.value = 0;">
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div><label>Total Payable Amount</label>
@@ -153,7 +121,3 @@ if ($inst_data) {
 
     </form>
 </div>
-
-<script src="fees.js"></script>
-<!-- //        <label>Reciept No </label>
-    // <input type="number" value="auto gnerated" name="reciept_no" readonly style="background: #eee;"> -->

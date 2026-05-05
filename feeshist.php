@@ -2,13 +2,13 @@
 <?php
 include('auth.php');
 include('db.php');
-
+include('header.php') ;
 if (isset($_GET['scholar_no'])) {
     $scholar_no = mysqli_real_escape_string($conn, $_GET['scholar_no']);
     $query = "SELECT * FROM fees_payments WHERE scholar_no = '$scholar_no'ORDER BY receipt_no DESC";
     $res = mysqli_query($conn, $query);
     if (mysqli_num_rows($res) == 0) {
-        die("<h2 style='text-align:center; padding-top:50px;'>Student Not Found!</h2>");
+        die("<h2 style='text-align:center; padding-top:50px;'> Oops! Records Not Found say for fee submission!</h2>");
     }
 } else {
     header("Location:dash.php");
