@@ -71,7 +71,7 @@ if (isset($_GET['scholar_no'])) {
                     <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
                 </div> -->
                 <!-- <div> <label> Total Due Amount</label>
-                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly>
+                    <input type="number" value="" name="due_amt" readonly>
                 </div>
             </div> -->
             <div class="row">

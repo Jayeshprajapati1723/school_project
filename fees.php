@@ -63,7 +63,7 @@ if ($inst_data) {
 
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
-    <form action="savefees.php" method="post">
+    <form action="savefees.php" method="post" class="form">
         <div class="prow">
             <div class="row">
                 <div class="col"> <label>Scholar No </label>
@@ -151,7 +151,7 @@ if ($inst_data) {
                 <div> <button class="btn">Generate reciept </button></div>
             </div>
 
-    </form>
+    </form >
 </div>
 
 <script src="fees.js"></script>

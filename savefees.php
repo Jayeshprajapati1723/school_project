@@ -1,6 +1,9 @@
 <?php
-include('auth.php') ;
- include('db.php'); // Aapka database connection
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+include('auth.php');
+include('db.php'); // Aapka database connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // 1. Inputs ko variables mein pakdo
@@ -28,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($conn, $sql)) {
             $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
-            header("Location: print_receipt.php?id=". $last_id);
+            header("Location: print_receipt.php?id=" . $last_id);
             exit();
         } else {
             echo "Error: " . mysqli_error($conn);
