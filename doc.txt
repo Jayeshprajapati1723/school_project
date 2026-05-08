@@ -119,3 +119,8 @@ create TABLE bus_payments  (
     payment_mode VARCHAR(20) ,
 remark varchar(100) 
 );
+
+ALTER table bus_payments 
+add installments varchar(10) not null after year ;
+
+alter table bus_payments add recieved varchar(50) not null after date ;

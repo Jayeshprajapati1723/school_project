@@ -1,15 +1,16 @@
 <?php
-$cdate = date('d-m-Y');
+$cdate = date('Y-m-y');
+$tbf = 3000;
 include('db.php');
-include('auth.php') ;
+include('auth.php');
 include('header.php');
 //scholar no catch kro 
 if (isset($_GET['scholar_no'])) {
-    $scholar = ($_GET['scholar_no']);
+    $scholar_no = ($_GET['scholar_no']);
     // scholarno ko rkha ek variable m 
-    $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
+    $scholar_no = mysqli_real_escape_string($conn, $_GET['scholar_no']);
     //querry m hmne bola select kro us scholar ko      
-    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'";
+    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar_no'";
     //res ek array jesa h store kr rha h fir 
     $res = mysqli_query($conn, $query);
     //data ko hmne rkha h sari values nikalne k liye res yha fetch ho rha h 
@@ -22,6 +23,21 @@ if (isset($_GET['scholar_no'])) {
     header("Location:dash.php");
     exit();
 }
+
+$check_sql = "SELECT remaining FROM bus_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
+$check_res = mysqli_query($conn, $check_sql);
+if ($row = mysqli_fetch_assoc($check_res)) {
+    $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
+} else {
+    $due_amt = $tbf; //3k dikhenge jb tk kn bhroge 
+}
+$next_installment = 1; // Default
+$inst_query = mysqli_query($conn, "SELECT installments FROM bus_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
+$inst_data = mysqli_fetch_assoc($inst_query);
+
+if ($inst_data) {
+    $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
+}
 ?>
 <link rel="stylesheet" href="fees.css">
 <!-- //css whi rkhi h same as fees -->
@@ -31,11 +47,11 @@ if (isset($_GET['scholar_no'])) {
 
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
-    <form action="acc.php" method="post">
+    <form action="savebusfees.php" method="post">
         <div class="prow">
             <div class="row">
                 <div class="col"> <label>Scholar No </label>
-                    <input type="number" value="<?= $scholar ?>"
+                    <input type="number" value="<?= $scholar_no ?>"
                         name="scholar_no" placeholder="auto generated" readonly required>
                 </div>
                 <div class="col"> <label>Student Name</label>
@@ -50,11 +66,11 @@ if (isset($_GET['scholar_no'])) {
 
                     <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
                 </div>
-                <!-- <div class="col"> <label>Installment No </label>
+                <div class="col"> <label>Installment No </label>
                     <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
                         min='1' value="<?= $next_installment ?>" readonly
                         required>
-                </div> -->
+                </div>
                 <div class="col"> <label>Date</label>
                     <input type="date"
                         value="<?= $cdate ?>"
@@ -63,28 +79,24 @@ if (isset($_GET['scholar_no'])) {
             </div>
             <div class="row">
                 <div class="col"> <label>Contact</label>
-
                     <input value="<?= $data['father_mobile'] ?>" name="f_mob" readonly>
                 </div>
-                <!-- <div> <label>Total Fee Amount
+                <!-- tbf means total bus fees -->
+                <div> <label>Total Bus Fee Amount
                     </label>
-                    <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
-                </div> -->
-                <!-- <div> <label> Total Due Amount</label>
-                    <input type="number" value="" name="due_amt" readonly>
+                    <input type="number" value="<?= $tbf ?>" name="tbf" readonly>
                 </div>
-            </div> -->
+                <div> <label> Total Bus Due Amount</label>
+                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly id="due">
+                </div>
+            </div>
             <div class="row">
                 <div><label> Bus Deposit amount </label>
                     <input type="number" min="1" name="diposite_amt"
                         id="depo"
                         placeholder="enter deposite amount here " required>
                 </div>
-                <!-- <div> <label>Discount </label>
-                    <input type="number" min='0' name="discount_amt" placeholder="enter diposite amount here "
-                        id="disc"
-                        onchange="if(this.value < 0) this.value = 0;">
-                </div> -->
+
             </div>
             <div class="row">
                 <div><label>Total Payable Amount</label>
@@ -120,4 +132,43 @@ if (isset($_GET['scholar_no'])) {
             </div>
 
     </form>
+    <script>
+        let depoInput = document.querySelector('#depo')
+        let totalp = document.querySelector('#final_p');
+        let due = document.querySelector("#due");
+        let btn = document.querySelector('#btn');
+        depoInput.addEventListener('input', () => {
+            // Number() use karna zaruri hai warna 10+10 ko 1010 bana dega
+            let tdue = Number(due.value);
+            let total = Number(depoInput.value) || 0;
+            if (tdue == 0) {
+                alert("fees is completed ");
+                alert('no due amount') ;
+                return;
+            }
+            if (total <= tdue) {
+                totalp.value = total;
+            } else {
+                totalp.value = 0;
+                depoInput.value = "";
+                alert('amount is greater than due please check ')
+            }
+            if (tdue == 0) {
+                btn.addEventListener('click', () => {
+                    btn.ariaDisabled = true;
+                    btn.style.opacity = "0.5"; // User ko dikhane ke liye ki ye band hai
+    btn.style.cursor = "not-allowed";
+                })
+            }
+        });
+        window.addEventListener('pageshow', (event) => {
+            // Agar page cache (history) se load ho raha hai
+            if (event.persisted) {
+                window.location.reload();
+                if (window.location.pathname.includes('busfees.php')) {
+                    window.location.replace("dash.php");
+                }
+            }
+        });
+    </script>
 </div>

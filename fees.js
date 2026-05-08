@@ -10,16 +10,17 @@ function calculateTotal() {
     let depo = Number(depoInput.value) || 0;
     let disc = Number(discInput.value) || 0;
     let due = Number(dueInput.value) ;
-    if(depo <= due) { 
+    if(depo <= due && disc <= due ) { 
     totalInput.value = depo + disc;
     }else{
     totalInput.value =0;
-depoInput.value = 0; ; 
-      alert ('INCORRECT AMOUNT ENTERED PLEASE CHECK') ;
+depoInput.value = 0; 
+discInput.value = 0 ; 
+alert('check discout and deposite amount ') ;
+      alert ('INCORRECT ENTERED AMOUNT  PLEASE CHECK') ;
       alert('DEPOSITE AMOUNT IS ALWAYS LESS THAN OR EQUAL TO DEU AMOUNT ') ;
 depoInput.focus() ; //CURSROSR WHI A JATA H IS FUNCTION SE 
     }
-
 }
 
 
