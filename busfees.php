@@ -143,8 +143,7 @@ if ($inst_data) {
             let total = Number(depoInput.value) || 0;
             if (tdue == 0) {
                 alert("fees is completed ");
-                alert('no due amount') ;
-                return;
+                alert('no due amount');
             }
             if (total <= tdue) {
                 totalp.value = total;
@@ -157,8 +156,12 @@ if ($inst_data) {
                 btn.addEventListener('click', () => {
                     btn.ariaDisabled = true;
                     btn.style.opacity = "0.5"; // User ko dikhane ke liye ki ye band hai
-    btn.style.cursor = "not-allowed";
+                    btn.style.cursor = "not-allowed";
                 })
+            } else {
+                btn.disabled = false;
+                btn.style.opacity = "1";
+                btn.style.cursor = "pointer";
             }
         });
         window.addEventListener('pageshow', (event) => {
