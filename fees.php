@@ -60,6 +60,8 @@ if ($inst_data) {
     <a href="dash.php" class="btn btn-back"><button>Back to Dashboard</button></a>
     <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
     <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class='busfees'>🚌Bus Fee</a>
+        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class='busfees'>Activity/OTHER Fee</a>
+
 
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
