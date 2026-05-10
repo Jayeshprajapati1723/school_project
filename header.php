@@ -36,7 +36,7 @@
             <?php else: ?>
                 <li><a href="login.php" style="background: #1a237e; color: white; padding: 7px 15px; border-radius: 5px;">Login</a></li>
             <?php endif; ?>
-            <!-- <button class="thbtn">Theme</button> -->
+            <button class="thbtn">Theme</button>
         </ul>
     </nav>
 
