@@ -40,13 +40,19 @@ if ($inst_data) {
 }
 ?>
 <link rel="stylesheet" href="fees.css">
-<!-- //css whi rkhi h same as fees -->
-<div class="container">
-    <a href="dash.php" class="btn btn-back"><button>Back to Dashboard</button></a>
-    <a href="busfees.php" class='busfees'>🚌Bus Fee</a>
+<!-- //css whi rkhi h same as fees 2bus 3other fee 1 apna academic fee container-->
+     <div class="links">
+        <a href="dash.php" class=""><button>Back to Dashboard</button></a>
+        <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
+        <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
+        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
+    </div>
+
+<div class="container2">
+
 
     <h1>RAINBOW KIDS SCHOOL</h1>
-    <h2>FEES DETAILS </h2>
+    <h2>BUS FEES DETAILS </h2>
     <form action="savebusfees.php" method="post">
         <div class="prow">
             <div class="row">

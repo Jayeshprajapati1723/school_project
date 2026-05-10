@@ -1,7 +1,7 @@
 <?php
 include('db.php');
 include('auth.php');
-include('header.php') ;
+include('header.php');
 $cdate = date('Y-m-d');
 // include('feeshist.php');//fees history .php
 
@@ -55,14 +55,14 @@ if ($inst_data) {
 ?>
 
 <link rel="stylesheet" href="fees.css">
+    <div class="links">
+        <a href="dash.php" class=""><button>Back to Dashboard</button></a>
+        <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
+        <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
+        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
+    </div>
 
 <div class="container">
-    <a href="dash.php" class="btn btn-back"><button>Back to Dashboard</button></a>
-    <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
-    <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class='busfees'>🚌Bus Fee</a>
-        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class='busfees'>Activity/OTHER Fee</a>
-
-
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
     <form action="savefees.php" method="post" class="form">
@@ -153,7 +153,8 @@ if ($inst_data) {
                 <div> <button class="btn">Generate reciept </button></div>
             </div>
 
-    </form >
+    </form>
+    
 </div>
 
 <script src="fees.js"></script>

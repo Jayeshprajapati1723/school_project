@@ -1,5 +1,5 @@
 <!-- other fees k content of html -->
- <?php
+<?php
 $cdate = date('Y-m-y');
 $tbf = 3000;
 include('db.php');
@@ -40,14 +40,19 @@ if ($inst_data) {
     $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
 }
 ?>
+
 <link rel="stylesheet" href="fees.css">
 <!-- //css whi rkhi h same as fees -->
-<div class="container">
-    <a href="dash.php" class="btn btn-back"><button>Back to Dashboard</button></a>
-    <a href="busfees.php" class='busfees'>🚌Bus Fee</a>
+     <div class="links">
+        <a href="dash.php" class=""><button>Back to Dashboard</button></a>
+        <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
+        <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
+        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
+    </div>
 
+<div class="container3">
     <h1>RAINBOW KIDS SCHOOL</h1>
-    <h2>FEES DETAILS </h2>
+    <h2>OTHER/ACTIVITY FEES DETAILS </h2>
     <form action="savebusfees.php" method="post">
         <div class="prow">
             <div class="row">
@@ -64,47 +69,36 @@ if ($inst_data) {
             </div>
             <div class="row">
                 <div class="col"> <label>Class</label>
-
                     <input value="<?= $data['student_class'] ?>" name="student_class" readonly>
-                </div>
-                <div class="col"> <label>Installment No </label>
-                    <input type="number" name="installment_no" placeholder="enter installment no 1,2 etc "
-                        min='1' value="<?= $next_installment ?>" readonly
-                        required>
                 </div>
                 <div class="col"> <label>Date</label>
                     <input type="date"
                         value="<?= $cdate ?>"
                         name="date" required>
                 </div>
-            </div>
-            <div class="row">
+
                 <div class="col"> <label>Contact</label>
                     <input value="<?= $data['father_mobile'] ?>" name="f_mob" readonly>
                 </div>
-                <!-- tbf means total bus fees -->
-                <div> <label>Total Bus Fee Amount
-                    </label>
-                    <input type="number" value="<?= $tbf ?>" name="tbf" readonly>
-                </div>
-                <div> <label> Total Bus Due Amount</label>
-                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly id="due">
-                </div>
             </div>
             <div class="row">
-                <div><label> Bus Deposit amount </label>
+                <div>
+                    <label>Event Name</label>
+                    <input type="text" name="eventname" placeholder="event name for fee collection ">
+                </div>
+                <div><label> Activity Deposit amount </label>
                     <input type="number" min="1" name="diposite_amt"
                         id="depo"
                         placeholder="enter deposite amount here " required>
                 </div>
-
-            </div>
-            <div class="row">
                 <div><label>Total Payable Amount</label>
-                    <input type="tel" name="paid_amt" placeholder="Enter Diposite Amount + Discount Amount for confirmation "
+                    <input type="tel" name="paid_amt"
                         id="final_p"
                         required readonly>
                 </div>
+            </div>
+            <div class="row">
+
                 <div> <label>Recieved by </label>
                     <input type="text" name="recieved" placeholder="teacher/faculty " required>
                 </div>
@@ -127,6 +121,8 @@ if ($inst_data) {
                     <p>***NOTE***<br>
                         1 : All feilds are filled carefully and recheck again <br>
                         2 : Check correctly STUDENT NAME and its SCHOLAR NO and reconfirmed before generate reciept
+                        <br>
+                        3 : EVENT name and activity amount confirm before submit form
                     </p>
                 </div>
                 <div> <button class="btn">Generate reciept </button></div>
@@ -138,33 +134,15 @@ if ($inst_data) {
         let totalp = document.querySelector('#final_p');
         let due = document.querySelector("#due");
         let btn = document.querySelector('#btn');
-        depoInput.addEventListener('input', () => {
-            // Number() use karna zaruri hai warna 10+10 ko 1010 bana dega
-            let tdue = Number(due.value);
-            let total = Number(depoInput.value) || 0;
-            if (tdue == 0) {
-                alert("fees is completed ");
-                alert('no due amount');
-            }
-            if (total <= tdue) {
-                totalp.value = total;
+        depoInput.addEventListener('input', () => { // Number() use karna zaruri hai warna 10+10 ko 1010 bana dega
+            let depo = Number(depoInput.value) || 0;
+            if (depo <= 5000 && depo >= 0) {
+                totalp.value = depo;
             } else {
-                totalp.value = 0;
-                depoInput.value = "";
-                alert('amount is greater than due please check ')
+                depoInput.value = 0;
+                alert('amount never less than 0');
             }
-            if (tdue == 0) {
-                btn.addEventListener('click', () => {
-                    btn.ariaDisabled = true;
-                    btn.style.opacity = "0.5"; // User ko dikhane ke liye ki ye band hai
-                    btn.style.cursor = "not-allowed";
-                })
-            } else {
-                btn.disabled = false;
-                btn.style.opacity = "1";
-                btn.style.cursor = "pointer";
-            }
-        });
+        })
         window.addEventListener('pageshow', (event) => {
             // Agar page cache (history) se load ho raha hai
             if (event.persisted) {

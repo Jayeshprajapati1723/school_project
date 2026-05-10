@@ -12,7 +12,23 @@ body{
     border : 2px solid black ;
   width: 60% ;
     margin: auto;
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(235 204 176);
+    padding : 30px ;
+    flex-wrap: wrap;
+}
+.container2 {
+    border : 2px solid black ;
+  width: 60% ;
+    margin: auto;
+    background-color: rgb(255 231 155);
+    padding : 30px ;
+    flex-wrap: wrap;
+}
+.container3 {
+    border : 2px solid black ;
+  width: 60% ;
+    margin: auto;
+    background-color: rgb(128 204 102 / 63%);
     padding : 30px ;
     flex-wrap: wrap;
 }
@@ -111,4 +127,25 @@ background-color: #ffffff; /* White background for form */
 
 .btn:hover {
     background-color: greenyellow; /* Darker blue on hover */
+}
+
+.links{
+    width: 60%;
+margin: auto;
+background-color: black;
+    margin-top: auto;
+    display : flex ;
+    flex-direction: row;
+    flex : 1 ;
+    column-gap: 35% ;
+    align-content: center;
+}
+button{
+        background-color: rgb(9, 9, 14);
+    color : white ;
+    font-weight: 800;
+border-radius: 0.4rem;
+}
+button:hover{
+ background-color: chartreuse;color: #f20707;
 }
