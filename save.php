@@ -109,16 +109,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-<!-- // // IDs & Social
-    //
-    // $sssm_id        = mysqli_real_escape_string($conn, $_POST['sssm']);
-    // $family_id      = mysqli_real_escape_string($conn, $_POST['family']);
-    // $aadhar_no      = mysqli_real_escape_string($conn, $_POST['aadhar']);
-    // $category       = mysqli_real_escape_string($conn, $_POST['cat']);
-    // $caste          = mysqli_real_escape_string($conn, $_POST['caste']);
-    
-    // // Bank
-    // $ac_holdername  = mysqli_real_escape_string($conn, $_POST['ac_holdername']); 
-    // $bank_name      = mysqli_real_escape_string($conn, $_POST['bank']);
-    // $account_no     = mysqli_real_escape_string($conn, $_POST['acc_no']);
-    // $ifsc_code      = mysqli_real_escape_string($conn, $_POST['ifsc']); -->
