@@ -150,6 +150,7 @@ if ($inst_data) {
             if (tdue == 0) {
                 alert("fees is completed ");
                 alert('no due amount');
+                return ;
             }
             if (total <= tdue) {
                 totalp.value = total;
