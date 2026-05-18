@@ -16,9 +16,7 @@ if(due == 0) {
     submit.disabled = true ;
     submit.style.backgroundColor = "red" ;
     return ;
-}
-    }
-    if(depo <= due && disc <= due ) { 
+}  else if(depo <= due && disc <= due ) { 
     totalInput.value = depo + disc;
     }else{
     totalInput.value =0;
@@ -29,6 +27,7 @@ alert('check discout and deposite amount ') ;
       alert('DEPOSITE AMOUNT IS ALWAYS LESS THAN OR EQUAL TO DEU AMOUNT ') ;
 depoInput.focus() ; //CURSROSR WHI A JATA H IS FUNCTION SE 
 }
+ }
 
 // Dono inputs par 'input' event listener laga do
 depoInput.addEventListener('input', calculateTotal);
