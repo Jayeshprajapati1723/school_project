@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($conn, $sql)) {
             $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
-            header("Location: print_receipt.php?id=" . $last_id);
+            header("Location: print_busreceipt.php?id=" . $last_id);
             exit();
         } else {
             echo "Error: " . mysqli_error($conn);
