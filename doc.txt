@@ -124,3 +124,20 @@ ALTER table bus_payments
 add installments varchar(10) not null after year ;
 
 alter table bus_payments add recieved varchar(50) not null after date ;
+
+//other fees 
+CREATE TABLE other_payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    scholar_no INT NOT NULL,
+    student_name VARCHAR(100) NOT NULL,
+    f_name VARCHAR(100) NOT NULL,
+    student_class VARCHAR(50) NOT NULL,
+    date DATE NOT NULL,
+    f_mob VARCHAR(15) NOT NULL,
+    eventname VARCHAR(150) NOT NULL,
+    diposite_amt DECIMAL(10, 2) NOT NULL,
+    paid_amt DECIMAL(10, 2) NOT NULL,
+    recieved VARCHAR(100) NOT NULL,
+    mode VARCHAR(20) NOT NULL,
+    remarks TEXT NULL,
+);

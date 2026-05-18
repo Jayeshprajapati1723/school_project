@@ -26,14 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($due_amt != 0) {
         $remaining_balance = $due_amt - ($deposit_amt);
         // 3. Database mein Insert karo
-        $sql = "INSERT INTO bus_payments (scholar_no,  student_name ,student_class,father_name, father_mobile, installments,total_bus_fare,
+        $sql = "INSERT INTO other_payments (scholar_no,  student_name ,student_class,father_name, father_mobile, installments,total_bus_fare,
        bus_deposit_amount, total_payable,
         due_amt ,remaining,date, recieved,payment_mode, remark) 
             VALUES ('$scholar_no','$student_name','$student_class', '$f_name','$f_mob','$inst_no','$tbf_fees','$deposit_amt', '$paid_amt', '$due_amt' ,'$remaining_balance', '$date','$received_by','$payment_mode','$remarks')";
 
         if (mysqli_query($conn, $sql)) {
             $last_id = mysqli_insert_id($conn); // Receipt Number mil gaya!
-            header("Location: print_receipt.php?id=" . $last_id);
+            header("Location: otherfeesprint_receipt.php?id=" . $last_id);
             exit();
         } else {
             echo "Error: " . mysqli_error($conn);

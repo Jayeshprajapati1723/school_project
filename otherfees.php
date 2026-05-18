@@ -25,20 +25,20 @@ if (isset($_GET['scholar_no'])) {
     exit();
 }
 
-$check_sql = "SELECT remaining FROM bus_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
-$check_res = mysqli_query($conn, $check_sql);
-if ($row = mysqli_fetch_assoc($check_res)) {
-    $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
-} else {
-    $due_amt = $tbf; //3k dikhenge jb tk kn bhroge 
-}
-$next_installment = 1; // Default
-$inst_query = mysqli_query($conn, "SELECT installments FROM bus_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
-$inst_data = mysqli_fetch_assoc($inst_query);
+// $check_sql = "SELECT remaining FROM other_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no  DESC LIMIT 1";
+// $check_res = mysqli_query($conn, $check_sql);
+// if ($row = mysqli_fetch_assoc($check_res)) {
+//     $due_amt  = $row['remaining']; // Agar purani receipt mili, toh use update kar do
+// } else {
+//     $due_amt = $tbf; //3k dikhenge jb tk kn bhroge 
+// }
+// $next_installment = 1; // Default
+// $inst_query = mysqli_query($conn, "SELECT installments FROM other_payments WHERE scholar_no = '$scholar_no' ORDER BY receipt_no DESC LIMIT 1");
+// $inst_data = mysqli_fetch_assoc($inst_query);
 
-if ($inst_data) {
-    $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
-}
+// if ($inst_data) {
+//     $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
+// }
 ?>
 
 <link rel="stylesheet" href="fees.css">
@@ -53,7 +53,7 @@ if ($inst_data) {
 <div class="container3">
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>OTHER/ACTIVITY FEES DETAILS </h2>
-    <form action="savebusfees.php" method="post">
+    <form action="saveotherfees.php" method="post">
         <div class="prow">
             <div class="row">
                 <div class="col"> <label>Scholar No </label>
