@@ -1,5 +1,5 @@
 <?php
-$cdate = date('Y-m-y');
+$cdate = date('Y-m-d');
 $tbf = 3000;
 include('db.php');
 include('auth.php');
@@ -41,12 +41,12 @@ if ($inst_data) {
 ?>
 <link rel="stylesheet" href="fees.css">
 <!-- //css whi rkhi h same as fees 2bus 3other fee 1 apna academic fee container-->
-     <div class="links">
-        <a href="dash.php" class=""><button>Back to Dashboard</button></a>
-        <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
-        <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
-        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
-    </div>
+<div class="links">
+    <a href="dash.php" class=""><button>Back to Dashboard</button></a>
+    <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
+    <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
+    <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
+</div>
 
 <div class="container2">
 
@@ -150,8 +150,8 @@ if ($inst_data) {
             if (tdue == 0) {
                 alert("fees is completed ");
                 alert('no due amount');
-                return ;
-            }else if (total <= tdue) {
+                return;
+            } else if (total <= tdue) {
                 totalp.value = total;
             } else {
                 totalp.value = 0;

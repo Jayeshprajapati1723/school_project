@@ -15,6 +15,7 @@ if(due == 0) {
     alert('FEES IS COMPLETED FOR THIS SESSION DUE IS 0 ' )
     submit.disabled = true ;
     submit.style.backgroundColor = "red" ;
+    submit.innerHTML = "Dont click";
     return ;
 }  else if(depo <= due && disc <= due ) { 
     totalInput.value = depo + disc;

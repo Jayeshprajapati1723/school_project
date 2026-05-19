@@ -1,6 +1,6 @@
 <!-- other fees k content of html -->
 <?php
-$cdate = date('Y-m-y');
+$cdate = date('Y-m-d');
 $tbf = 3000;
 include('db.php');
 include('auth.php');
