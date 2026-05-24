@@ -230,6 +230,10 @@ $result = mysqli_query($conn, $query);
                         <label>19. Caste <span style="color:red;">*</span></label>
                         <input type="text" name="caste" required>
                     </div>
+                    <div class="col">
+                        <label>20.Caste Certificate No</label>
+                        <input type="text" name="caste_certificate_no" placeholder="eg RS/123/123/12313131">
+                    </div>
                 </div>
 
                 <div class="row">

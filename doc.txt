@@ -141,3 +141,7 @@ CREATE TABLE other_payments (
     mode VARCHAR(20) NOT NULL,
     remarks TEXT NULL,
 );
+dt 24-05-2026
+// add caste certificate no 
+alter table newadmissions 
+add caste_certificate_no varchar(50) not null after caste ;
