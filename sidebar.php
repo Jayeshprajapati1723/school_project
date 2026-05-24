@@ -30,6 +30,7 @@ include('auth.php');
                 <a href="attendance_select.php"><i class="fa fa-calendar-check"></i> Take Attendance</a>
                 <a href="monthly_report.php"><i class="fa fa-file-invoice"></i> Monthly Sheet</a>
                 <a href="view_student.php"><i class="fa fa-users"></i> View Students</a>
+                <a href="promotion.php"> Promotion page </a>
             </div>
         </li>
 

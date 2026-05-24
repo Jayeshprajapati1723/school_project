@@ -145,3 +145,31 @@ dt 24-05-2026
 // add caste certificate no 
 alter table newadmissions 
 add caste_certificate_no varchar(50) not null after caste ;
+
+primary key drop ki than add 
+primary key change kr di h scholar + seesion 
+alter table newadmissions add primary key(scholar_no,session);
+
+
+create table promotion_records (
+    id int AUTO_INCREMENT  ,
+    old_session varchar(15) not null ,
+    new_session  varchar(20) not null, 
+    date_of_promotion date not null ,
+    teacher_name varchar(50) not null
+)
+//ek primary key bananah agr auto increment h to  
+create table promotion_records (
+    id int AUTO_INCREMENT primary key  ,
+    old_session varchar(15) not null ,
+    new_session  varchar(20) not null, 
+    date_of_promotion date not null ,
+    teacher_name varchar(50) not null
+)
+
+update newadmissions set status = "Active" where admission_type = "Normal"
+update newadmissions set status = "TC" where admission_type = "RTE"
+
+//id bna di for feature refrences 
+ALTER TABLE newadmissions ADD id INT AUTO_INCREMENT UNIQUE; 
+

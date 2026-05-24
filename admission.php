@@ -9,6 +9,7 @@ include('sidebar.php');
 
 $query = "SELECT * FROM fees_master";
 $result = mysqli_query($conn, $query);
+$date = date("Y-m-d") ;
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +51,9 @@ $result = mysqli_query($conn, $query);
                     </div>
                     <div class="col">
                         <label>2. Admission date <span style="color:red;">*</span></label>
-                        <input type="date" name="admission_date" style="text-transform:uppercase;" required>
+                        <input type="date" name="admission_date"  
+                        value="<?= $date ?>"
+                        style="text-transform:uppercase;" required>
                     </div>
                 </div>
 
