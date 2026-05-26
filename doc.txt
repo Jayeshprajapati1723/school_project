@@ -179,4 +179,6 @@ insert into newadmissions (scholar_no, session ,admission_date,admission_type, s
 
 delete from newadmissions where session = "2027-28"; checking time 
 
+again delete 
+delete from newadmissions where SESSION = "2027-28" And session ="2028-29"
 

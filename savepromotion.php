@@ -47,12 +47,15 @@ $new_total_standard_fees = $total_standard_fees['standard_fees'] ;
         bank_name, account_no, ifsc_code, '$newclass', section, payment_mode, 
         '$new_total_standard_fees', discount_amount, final_payable_fees, remaining_balance, photo_path
         from newadmissions where student_class= '$oldclasses[$i]' AND session= '$old_session' AND STATUS = 'active'";
-    
-        if (mysqli_query($conn, $new_q)) {
-        } else {
-            mysqli_error($conn);
-        }
+  
+        // if (mysqli_query($conn, $new_q)) {
+        // } else {
+        //     mysqli_error($conn);
+        // }
+
     }
+            $old_session = $new_session ;
+        echo $old_session ;
     echo "<script>
     alert('sucessfully promoted now ::) ');
     window.location.href = 'dash.php';
