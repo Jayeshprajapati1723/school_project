@@ -173,3 +173,10 @@ update newadmissions set status = "TC" where admission_type = "RTE"
 //id bna di for feature refrences 
 ALTER TABLE newadmissions ADD id INT AUTO_INCREMENT UNIQUE; 
 
+date 26-05-2026
+/queery chexk by echo +exit 
+insert into newadmissions (scholar_no, session ,admission_date,admission_type, student_name, dob_figure, dob_words, gender, father_name, f_qualification, f_occupation, mother_name, m_qualification, m_occupation, mother_mobile, father_mobile, alt_mobile, guardian_name, guardian_relation, guardian_mobile, guardian_alt_mobile, permanent_address, current_address, religion, sssm_id, family_id, aadhar_no, category, caste, ac_holdername, bank_name, account_no, ifsc_code, student_class, section, payment_mode, total_standard_fees, discount_amount, final_payable_fees, remaining_balance, photo_path ) select scholar_no, 2027-28 ,admission_date,admission_type, student_name, dob_figure, dob_words, gender, father_name, f_qualification, f_occupation, mother_name, m_qualification, m_occupation, mother_mobile, father_mobile, alt_mobile, guardian_name, guardian_relation, guardian_mobile, guardian_alt_mobile, permanent_address, current_address, religion, sssm_id, family_id, aadhar_no, category, caste, ac_holdername, bank_name, account_no, ifsc_code, 10th, section, payment_mode, 15000.00, discount_amount, final_payable_fees, remaining_balance, photo_path from newadmissions where class= '9th' AND session= '2026-27' and status abhi joda kyoki active pr hi kam krna h hmesha  
+
+delete from newadmissions where session = "2027-28"; checking time 
+
+
