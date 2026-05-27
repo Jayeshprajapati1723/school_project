@@ -5,11 +5,19 @@ include('auth.php');
 include('header.php');
 $date = date('Y-m-d');
 
-$current_session_querry = 'SELECT session FROM newadmissions
-where session is not null AND session !=0  limit 1';
+
+$current_session_querry = 'SELECT new_session FROM promotion_records 
+where new_session is not null AND new_session !=0  limit 1';
 $result = mysqli_query($conn, $current_session_querry);
 $fetch_row = mysqli_fetch_assoc($result);
-$current_session = $fetch_row['session'];
+
+if($fetch_row !="") {
+    $current_session = $fetch_row['new_session'];
+ } else {
+    $current_session = "2026-27" ;
+ }
+// yha pr mene whi concept lga diya h agr row m new session mil rha h to old bnao vrna old ko mtlb ki current ko else se set kra diy  h 
+
 ?>
 <style>
     .container {

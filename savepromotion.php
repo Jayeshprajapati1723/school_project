@@ -19,19 +19,19 @@ values('$old_session','$new_session','$date','$teacher_name') ";
 if (mysqli_query($conn, $insert_querry)) {
 
     // $oldclasses = ["Nursery","kg1","kg2","1st","2nd","3rd","4th","5th",'6th','7th','8th','9th'] ;
-    
+
     $oldclasses = ["Nursery", "kg1", "kg2", "1st", "2nd", "3rd", "4th", "5th", '6th', '7th', '8th', '9th', '10th'];
     $newclass = 0;
-$i = 0 ;
+    $i = 0;
     for ($i = 11; $i >= 0; $i--) {
         $index  = $i + 1;
         $newclass = $oldclasses[$index];
         $fees_querry = "select standard_fees from fees_master where class_name = '$newclass' ";
         $fees_result = mysqli_query($conn, $fees_querry);
         $total_standard_fees = mysqli_fetch_assoc($fees_result);
-$new_total_standard_fees = $total_standard_fees['standard_fees'] ;
+        $new_total_standard_fees = $total_standard_fees['standard_fees'];
 
-        $new_q = "insert into newadmissions (scholar_no, session ,admission_date,admission_type, student_name, dob_figure, dob_words, gender, 
+        $new_q = "insert into newadmissions (scholar_no, session ,status,admission_date,admission_type, student_name, dob_figure, dob_words, gender, 
         father_name, f_qualification, f_occupation, mother_name, m_qualification, m_occupation, 
         mother_mobile, father_mobile, alt_mobile, guardian_name, guardian_relation, 
         guardian_mobile, guardian_alt_mobile, permanent_address, current_address, 
@@ -39,7 +39,7 @@ $new_total_standard_fees = $total_standard_fees['standard_fees'] ;
         bank_name, account_no, ifsc_code, student_class, section, payment_mode, 
         total_standard_fees, discount_amount, final_payable_fees, remaining_balance, photo_path
     ) select
-      scholar_no, '$new_session' ,admission_date,admission_type, student_name, dob_figure, dob_words, gender, 
+      scholar_no, '$new_session',status ,admission_date,admission_type, student_name, dob_figure, dob_words, gender, 
         father_name, f_qualification, f_occupation, mother_name, m_qualification, m_occupation, 
         mother_mobile, father_mobile, alt_mobile, guardian_name, guardian_relation, 
         guardian_mobile, guardian_alt_mobile, permanent_address, current_address, 
@@ -47,15 +47,12 @@ $new_total_standard_fees = $total_standard_fees['standard_fees'] ;
         bank_name, account_no, ifsc_code, '$newclass', section, payment_mode, 
         '$new_total_standard_fees', discount_amount, final_payable_fees, remaining_balance, photo_path
         from newadmissions where student_class= '$oldclasses[$i]' AND session= '$old_session' AND STATUS = 'active'";
-  
-        // if (mysqli_query($conn, $new_q)) {
-        // } else {
-        //     mysqli_error($conn);
-        // }
 
+        if (mysqli_query($conn, $new_q)) {
+        } else {
+            mysqli_error($conn);
+        }
     }
-            $old_session = $new_session ;
-        echo $old_session ;
     echo "<script>
     alert('sucessfully promoted now ::) ');
     window.location.href = 'dash.php';
@@ -67,5 +64,3 @@ $new_total_standard_fees = $total_standard_fees['standard_fees'] ;
     </script>";
     mysqli_error($conn);
 }
-
-?>

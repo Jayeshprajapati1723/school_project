@@ -1,16 +1,16 @@
-<?php
+<!-- <?php
 //session verify krna h jisse koi login h ya nhi chexk kr ske 
 include('auth.php');
 include('db.php');
 $has_sidebar= true;
 include('header.php') ;
-include('sidebar/sidebar.php'); 
+include('sidebar.php'); 
 
 
 // 1. Data Fetch Logic
 if(isset($_GET['scholar_no'])) {
     $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
-    $query = "SELECT * FROM admissions WHERE scholar_no = '$scholar'";
+    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'";
     $res = mysqli_query($conn, $query);
     $data = mysqli_fetch_assoc($res);
     
@@ -162,4 +162,4 @@ include('sidebar.php');
 
 <?php include('footer.php'); ?>
 </body>
-</html>
+</html> -->

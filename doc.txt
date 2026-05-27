@@ -182,3 +182,13 @@ delete from newadmissions where session = "2027-28"; checking time
 again delete 
 delete from newadmissions where SESSION = "2027-28" And session ="2028-29"
 
+date 27-05-26 
+aj sbse phle sbka session set kiya h 
+update `newadmissions`set session="2026-27" WHERE session ="" ;  
+
+UPDATE newadmissions set session = "2026-27" where session != "2026-27"
+
+TRUNCATE promotion_records ;
+
+//status pas krna bhul gye isliye error a rha tha status me new show ho rha tha ab querry m pass kr diya h  
+
