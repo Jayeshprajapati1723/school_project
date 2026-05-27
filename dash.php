@@ -46,11 +46,20 @@ if (!empty($f_relig)) {
 if (!empty($f_pay)) {
     $where .= " AND payment_mode = '$f_pay'";
 }
+$curr_session = mysqli_real_escape_string($conn, $_GET['curr_session'] ?? '');
+if (!empty($curr_session)) {
+    $where .= " AND session = '$curr_session'";
+}
 
+$status = mysqli_real_escape_string($conn, $_GET['STATUS'] ??'');
+if ($status) {
+    $where .= " AND STATUS = '$status'";
+}
 // Execute Final Data Query
 // new admissionn table 
 
 $sql = "SELECT * FROM newadmissions $where ORDER BY scholar_no DESC";
+
 $result = mysqli_query($conn, $sql);
 
 // Calculate Dashboard Statistics
@@ -90,14 +99,26 @@ $total_classes = $class_data['total_classes'] ?? 0;
         <div class="filter-section">
             <h3>🔍 Filter Records</h3>
             <form method="GET" class="filter-form">
+                <select id="curr_session"
+                    name="curr_session" >
+                    <option value="">--SESSION--</option>
+                    <option value="2026-27">2026-27</option>
+                    <option value="2027-28">2027-28</option>
+                    <option value="2028-29">2028-29</option>
+                </select>
+
+                <select name="STATUS">
+                    <option value="">--Status--</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive"> Inactive</option>
+                    <option value="TC">TC</option>
+                </select>
 
                 <input type="text" name="search" placeholder="Name/ID/Aadhar" value="<?= htmlspecialchars($search) ?>">
 
                 <select name="f_class">
                     <option value="">-- Select Class --</option>
                     <?php
-                    // 1. Check karo ki variable ka naam 'student_class' hai ya 'student_classes'
-                    // Maan lo humne upar se $student_class fetch kiya hai
                     $student_class = isset($data['student_class']) ? $data['student_class'] : '';
 
                     $all_classes = ['Nursery', 'KG-1', 'KG-2', '1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
@@ -144,6 +165,7 @@ $total_classes = $class_data['total_classes'] ?? 0;
                     <option value="Online" <?= ($f_pay == 'Online' ? 'selected' : '') ?>>Online</option>
                 </select>
 
+
                 <div class="form-actions">
                     <button type="submit" class="btn-apply">Apply</button>
                     <!-- //filechanges -->
@@ -157,6 +179,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
                 <thead>
                     <tr>
                         <th><input id="allcheckbox" type="checkbox"></th>
+                        <th>SESSION</th>
+                        <TH>STATUS</TH>
                         <th>Scholar ID</th>
                         <th>Student Name</th>
                         <th>Class</th>
@@ -172,6 +196,8 @@ $total_classes = $class_data['total_classes'] ?? 0;
                             <tr>
                                 <!-- yha dataselector mtlb h ki indiviucla box  -->
                                 <td><input class="dataselector" type="checkbox"> </td>
+                              <td> <?= $row['session'] ?> </td>
+                              <td> <?= $row['STATUS'] ?></td>
                                 <td class="bold-text"><?= $row['scholar_no'] ?></td>
                                 <td><?= strtoupper($row['student_name']) ?></td>
                                 <td><span class="class-badge"><?= $row['student_class'] ?></span></td>
@@ -179,22 +205,28 @@ $total_classes = $class_data['total_classes'] ?? 0;
                                         class="section"><?= $row['section'] ?></span></td>
                                 <td><a href="view_student.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">View</a></td>
                                 <td><a href="fees.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">fees</a></td>
-                                   <td><a href="feeshist.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">History</a></td>
+                                <td><a href="feeshist.php?scholar_no=<?= $row['scholar_no'] ?>" class="view-link">History</a></td>
                             </tr>
 
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                           <div> <td colspan="4" class="not">No matching records found.</td></div>
+                            <div>
+                                <td colspan="4" class="not">No matching records found.</td>
+                            </div>
                         </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
         </div>
+        
 
         <!-- <p class="footer-credit">Developed by **JS Coder**</p> -->
         <script src="dash.js"></script>
     </div>
 </div>
 
-<?php include('footer.php'); ?>
+<?php 
+echo $sql ;
+exit ;
+include('footer.php'); ?>
