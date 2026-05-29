@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $paid_amt = (float)$_POST['paid_amt'];
     $f_mob = $_POST['f_mob'];
     $f_name = mysqli_real_escape_string($conn, $_POST['f_name']);
+  
 
     if ($due_amt != 0) {
         $remaining_balance = $due_amt - ($deposit_amt +  $discount);

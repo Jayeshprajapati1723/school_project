@@ -9,7 +9,7 @@ include('sidebar.php');
 
 $query = "SELECT * FROM fees_master";
 $result = mysqli_query($conn, $query);
-$date = date("Y-m-d") ;
+$date = date("Y-m-d");
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +51,9 @@ $date = date("Y-m-d") ;
                     </div>
                     <div class="col">
                         <label>2. Admission date <span style="color:red;">*</span></label>
-                        <input type="date" name="admission_date"  
-                        value="<?= $date ?>"
-                        style="text-transform:uppercase;" required>
+                        <input type="date" name="admission_date"
+                            value="<?= $date ?>"
+                            style="text-transform:uppercase;" required>
                     </div>
                 </div>
 
@@ -127,6 +127,17 @@ $date = date("Y-m-d") ;
                     <div class="col">
                         <label>12a. Mother Mobile <span style="color:red;"></span></label>
                         <input type="NUMBER" name="mother_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label>12a. Whatsapp No <span style="color:red;"></span></label>
+                            <input type="NUMBER" name="whatsapp_no" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
+                        </div>
+                        <div class="col">
+                            <label>12a. Emergency No <span style="color:red;"></span></label>
+                            <input type="NUMBER" name="emergency_no" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
+                        </div>
                     </div>
 
                     <div class="col">
@@ -326,6 +337,7 @@ $date = date("Y-m-d") ;
 
     <script src="admission.js"></script>
 </body>
+
 
 </html>
 

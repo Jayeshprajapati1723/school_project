@@ -3,6 +3,7 @@ include('db.php');
 include('auth.php');
 include('header.php');
 $cdate = date('Y-m-d');
+
 // include('feeshist.php');//fees history .php
 
 // 1. Pehle ye decide kar lo ki 'Due' kya dikhana hai
@@ -23,10 +24,28 @@ if (isset($_GET['student_name'])) {
     $student_name = $_GET['student_name'];
 }
 
-if (isset($_GET['scholar_no'])) {
+$session = isset($_GET['session']) ? mysqli_real_escape_string($conn, $_GET['session']) : ""; 
+$optsession = ["--SESSION--", "2026-27"];
+// option for session from promotion records and dynamically chages 
+$curr_session_q = "select new_session from promotion_records order by id desc" ;
+$current_session_r = mysqli_query($conn, $curr_session_q);
+//ab option m jao 
+
+
+
+
+if (isset($_GET['scholar_no']))  {
+
     $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
-    // Table name correctly matched: newadmission
-    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'";
+    // Table name correctly matched: newadmissions AND session = '$session' 
+
+
+    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'and session ='2026-27'";
+
+
+    echo $query;
+
+
     $res = mysqli_query($conn, $query);
     $data = mysqli_fetch_assoc($res);
     if (!$data) {
@@ -52,15 +71,16 @@ $inst_data = mysqli_fetch_assoc($inst_query);
 if ($inst_data) {
     $next_installment = $inst_data['installments'] + 1; // Pichle mein +1 kar diya
 }
+
 ?>
 
 <link rel="stylesheet" href="fees.css">
-    <div class="links">
-        <a href="dash.php" class=""><button>Back to Dashboard</button></a>
-        <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
-        <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
-        <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
-    </div>
+<div class="links">
+    <a href="dash.php" class=""><button>Back to Dashboard</button></a>
+    <!-- ye link h bus fees ki isme scholar_no bhej rhe h  -->
+    <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
+    <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
+</div>
 
 <div class="container">
     <h1>RAINBOW KIDS SCHOOL</h1>
@@ -68,6 +88,25 @@ if ($inst_data) {
     <form action="savefees.php" method="post" class="form">
         <div class="prow">
             <div class="row">
+                <div>
+                    <label>Session</label>
+                    <select name="session" type="text">
+
+                        <option value=""> <?= $optsession[0] ?></option>
+                        <option value="2026-27">2026-27</option>
+
+                        <?php
+                        while ($current_session_list = mysqli_fetch_assoc($current_session_r)) {
+                            $optsession  = $current_session_list['new_session'];
+                            $selected = (isset($_GET['new_session']) && $_GET['new_session'] == $optsession) ? 'selected' : '';
+                            echo "<option value='$optsession' $selected>$optsession</option>";
+                        }
+                        ?>
+                        <!-- <option value="<?= $optsession[1] ?>"> <?= $optsession[1] ?></option>
+                        <option value="<?= $optsession[2] ?>"> <?= $optsession[2] ?></option>
+                        <option value="<?= $optsession[3] ?>"> <?= $optsession[3] ?></option>
+                    </select> -->
+                </div>
                 <div class="col"> <label>Scholar No </label>
                     <input type="number" value="<?= $scholar_no ?>"
                         name="scholar_no" placeholder="auto generated" readonly required>
@@ -100,15 +139,19 @@ if ($inst_data) {
 
                     <input value="<?= $data['father_mobile'] ?>" name="f_mob" readonly>
                 </div>
+                <div style="color: red;"> <label> Old class/session balance </label>
+                    <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly id="due">
+                </div>
                 <div> <label>Total Fee Amount
                     </label>
                     <input type="number" value="<?= $data['total_standard_fees'] ?>" name="total_standard_fees" readonly>
                 </div>
+
+            </div>
+            <div class="row">
                 <div> <label> Total Due Amount</label>
                     <input type="number" value="<?= $due_amt ?>" name="due_amt" readonly id="due">
                 </div>
-            </div>
-            <div class="row">
                 <div><label>Deposit amount </label>
                     <input type="number" min="1" name="diposite_amt"
                         id="depo"
@@ -154,7 +197,7 @@ if ($inst_data) {
             </div>
 
     </form>
-    
+
 </div>
 
 <script src="fees.js"></script>
