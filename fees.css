@@ -10,7 +10,7 @@ body{
 
 .container {
     border : 2px solid black ;
-  width: 60% ;
+  width: 65% ;
     margin: auto;
     background-color: rgb(235 204 176);
     padding : 30px ;
@@ -130,7 +130,7 @@ background-color: #ffffff; /* White background for form */
 }
 
 .links{
-    width: 60%;
+    width: 65%;
 margin: auto;
 background-color: black;
     margin-top: auto;

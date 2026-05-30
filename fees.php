@@ -24,37 +24,36 @@ if (isset($_GET['student_name'])) {
     $student_name = $_GET['student_name'];
 }
 
-$session = isset($_GET['session']) ? mysqli_real_escape_string($conn, $_GET['session']) : ""; 
+
 $optsession = ["--SESSION--", "2026-27"];
 // option for session from promotion records and dynamically chages 
-$curr_session_q = "select new_session from promotion_records order by id desc" ;
+$curr_session_q = "select new_session from promotion_records order by id desc";
 $current_session_r = mysqli_query($conn, $curr_session_q);
 //ab option m jao 
-
-
-
-
-if (isset($_GET['scholar_no']))  {
-
+$scholar = 0;
+if (isset($_GET['scholar_no'])) {
     $scholar = mysqli_real_escape_string($conn, $_GET['scholar_no']);
-    // Table name correctly matched: newadmissions AND session = '$session' 
+}
+$session = "2026-27";
+if (isset($_GET['session'])) {
+    $session = isset($_GET['session']) ? mysqli_real_escape_string($conn, $_GET['session']) : "";
+}
 
-
-    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'and session ='2026-27'";
-
-
+// Table name correctly matched: newadmissions AND session = '$session' 
+if ($session && $scholar) {
+    $query = "SELECT * FROM newadmissions WHERE scholar_no = '$scholar'and session ='$session'";
     echo $query;
-
-
     $res = mysqli_query($conn, $query);
     $data = mysqli_fetch_assoc($res);
+
     if (!$data) {
         die("<h2 style='text-align:center; padding-top:50px;'>Student Not Found!</h2>");
     }
 } else {
     header("Location:dash.php");
-    exit();
+    exit;
 }
+
 
 $due_amt = $data['total_standard_fees']; // By default full fees
 
@@ -81,32 +80,40 @@ if ($inst_data) {
     <a href="busfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>🚌Bus Fee </button></a>
     <a href="otherfees.php?scholar_no=<?= $data['scholar_no'] ?>" class=''><button>Activity/OTHER Fee</button></a>
 </div>
+<div class="links">
+    <form method="get">
+        <input type="hidden" name="scholar_no" value="<?= $scholar ?>">
+        <label>Session</label>
+        <select name="session" type="text">
 
+            <option value=""> <?= $optsession[0] ?></option>
+            <option value="2026-27">2026-27</option>
+
+            <?php
+            while ($current_session_list = mysqli_fetch_assoc($current_session_r)) {
+                $optsession  = $current_session_list['new_session'];
+                $selected = (isset($_GET['session']) && $_GET['session'] == $optsession) ? 'selected' : '';
+                echo "<option value='$optsession' $selected>$optsession</option>";
+            }
+            ?>
+        </select>
+        <div class="form-actions">
+            <button type="submit" class="btn-apply">Apply</button>
+            <!-- //filechanges -->
+            <a href="fees.php" class="btn-reset">Reset</a>
+        </div>
+    </form>
+</div>
 <div class="container">
+
     <h1>RAINBOW KIDS SCHOOL</h1>
     <h2>FEES DETAILS </h2>
-    <form action="savefees.php" method="post" class="form">
+
+    <form action="savefees.php" method="post"
+        class="form">
         <div class="prow">
             <div class="row">
-                <div>
-                    <label>Session</label>
-                    <select name="session" type="text">
 
-                        <option value=""> <?= $optsession[0] ?></option>
-                        <option value="2026-27">2026-27</option>
-
-                        <?php
-                        while ($current_session_list = mysqli_fetch_assoc($current_session_r)) {
-                            $optsession  = $current_session_list['new_session'];
-                            $selected = (isset($_GET['new_session']) && $_GET['new_session'] == $optsession) ? 'selected' : '';
-                            echo "<option value='$optsession' $selected>$optsession</option>";
-                        }
-                        ?>
-                        <!-- <option value="<?= $optsession[1] ?>"> <?= $optsession[1] ?></option>
-                        <option value="<?= $optsession[2] ?>"> <?= $optsession[2] ?></option>
-                        <option value="<?= $optsession[3] ?>"> <?= $optsession[3] ?></option>
-                    </select> -->
-                </div>
                 <div class="col"> <label>Scholar No </label>
                     <input type="number" value="<?= $scholar_no ?>"
                         name="scholar_no" placeholder="auto generated" readonly required>
