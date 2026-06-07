@@ -1,33 +1,53 @@
-/* --- Fee Calculation logic --- */
-function applyMasterFees() {
-    // Check admission type first
-    const admissionType = document.querySelector('input[name="admission_type"]:checked').value;
-    
-    // Agar RTE hai toh fees humesha 0 rahegi, aage ka code nahi chalega
-    if (admissionType === 'RTE') {
-        setFeesToZero();
-        return; 
-    }
+let fees = [
+    '11500',
+'12000',
+'12000',
+'12500',
+'12500',
+'13000',
+'13000',
+'13000',
+'13500',
+'13500',
+'13500',
+'14000',
+'15000',
 
-    let select = document.getElementById('class_picker');
-    let fees = select.options[select.selectedIndex].getAttribute('data-fees') || 0;
-    
-    document.getElementById('display_std').innerText = fees;
-    document.getElementById('hidden_std_fees').value = fees;
-    calculateFinal();
+]
+function selectclass() {
+    let class_picked = document.querySelector('#class_picker').value ;
+
+
+if(class_picked) { 
+console.log(class_picked) ;
+   let classes = ['Nursery', 'kg1', 'kg2', "1", '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
+let indexforfees = classes.indexOf(class_picked) ;
+console.log(indexforfees) ;
+let finalpay= fees[indexforfees] ;
+
+document.querySelector("#standardfees").value = finalpay ;
+console.log(finalpay) ;
+
+ }
 }
+/* Nursery	11500
+KG1	12000
+KG2	12000
+1st	12500
+2nd	12500
+3rd	13000
+4th	13000
+5th	13000
+6th	13500
+7th	13500
+8th	13500
+9th	14000
+10th	15000
 
-function calculateFinal() {
-    const admissionType = document.querySelector('input[name="admission_type"]:checked').value;
-    if (admissionType === 'RTE') return;
+*/ 
 
-    let stdFees = parseFloat(document.getElementById('hidden_std_fees').value) || 0;
-    let discount = parseFloat(document.getElementById('discount_box').value) || 0;
-    let final = stdFees - discount;
-    
-    document.getElementById('display_final').innerText = final;
-    document.getElementById('hidden_final_fees').value = final;
-}
+
+
 
 /* --- Admission Type Change Logic (RTE vs Normal) --- */
 function handleAdmissionTypeChange() {
@@ -51,19 +71,19 @@ function setFeesToZero() {
     document.getElementById('hidden_final_fees').value = 0;
 }
 
-/* --- Image preview logic --- */
-function previewImage() {
-    const file = document.getElementById('photoInput').files[0];
-    const preview = document.getElementById('imagePreview');
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-    }
-}
+// /* --- Image preview logic --- */
+// function previewImage() {
+//     const file = document.getElementById('photoInput').files[0];
+//     const preview = document.getElementById('imagePreview');
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = function(e) {
+//             preview.src = e.target.result;
+//             preview.style.display = 'block';
+//         }
+//         reader.readAsDataURL(file);
+//     }
+// }
 
 /* --- DOB Figure to Words Logic --- */
 function convertDateToWords() {
