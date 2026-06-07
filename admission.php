@@ -6,9 +6,9 @@ include('db.php');
 $has_sidebar = true;
 include('header.php');
 include('sidebar.php');
-
-$query = "SELECT * FROM fees_master";
-$result = mysqli_query($conn, $query);
+$sessionopt = ['session', '2026-27']; //ye array h option for session
+// $query = "SELECT * FROM fees_master";
+// $result = mysqli_query($conn, $query);
 $date = date("Y-m-d");
 ?>
 
@@ -27,7 +27,7 @@ $date = date("Y-m-d");
 <body>
 
     <div class="main-container">
-        <form action="save.php" method="POST" enctype="multipart/form-data">
+        <form action="saveadmission.php" method="POST" enctype="multipart/form-data">
             <h2 class="form-title">🌈 Rainbow Kids - Student Admission Form</h2>
 
             <div class="section">
@@ -39,18 +39,15 @@ $date = date("Y-m-d");
                     <!-- ADD SESSINON AND ADMISSION DATE  -->
                     <div class="col">
                         <label>2. Session <span style="color:red;">*</span></label>
-                        <!-- <input type="text" name="session" style="text-transform:uppercase;" required> -->
                         <select name="session" required>
-                            <option value="2026-27">2026-27</option>
-                            <option value="2026-27">2027-28</option>
-                            <option value="2026-27">2028-29</option>
-                            <option value="2026-27">2029-30</option>
-                            <option value="2026-27">2030-31</option>
-                            <option value="2026-27">2031-32</option>
+                            <option value="<?= $sessionopt[0]  ?>" disabled><?= $sessionopt[0] ?></option>
+                            <option value="<?= $sessionopt[1] ?>"><?= $sessionopt[1] ?></option>
+
+
                         </select>
                     </div>
                     <div class="col">
-                        <label>2. Admission date <span style="color:red;">*</span></label>
+                        <label>2a. Admission date <span style="color:red;">*</span></label>
                         <input type="date" name="admission_date"
                             value="<?= $date ?>"
                             style="text-transform:uppercase;" required>
@@ -59,7 +56,7 @@ $date = date("Y-m-d");
 
                 <div class="row">
                     <div class="col">
-                        <label>2. Student Name <span style="color:red;">*</span></label>
+                        <label>2b. Student Name <span style="color:red;">*</span></label>
                         <input type="text" name="student_name" style="text-transform:uppercase;" required>
                     </div>
                     <div class="col">
@@ -79,11 +76,12 @@ $date = date("Y-m-d");
                     <div class="col">
                         <label>5. Gender <span style="color:red;">*</span></label>
                         <div class="radio-group">
-                            <input type="radio" name="gender" value="Male" required> Male
-                            <input type="radio" name="gender" value="Female"> Female
-                            <!-- option is add on 24 6 26  -->
-                            <input type="radio" name="gender" value="Transgender"> Transgender
-
+                            <select name="gender" required placeholder="--SELECT GENGER--">
+                                <option disabled>--SELECT GENGER--</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="Transgender">Transgender</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -94,12 +92,12 @@ $date = date("Y-m-d");
                         <input type="text" name="father_name" required>
                     </div>
                     <div class="col">
-                        <label>7. Father. Qualification <span style="color:red;">*</span></label>
-                        <input type="text" name="f_qualification" required>
+                        <label>7. Father. Qualification <span style="color:red;"></span></label>
+                        <input type="text" name="f_qualification">
                     </div>
                     <div class="col">
-                        <label>8. Father. Occupation <span style="color:red;">*</span></label>
-                        <input type="text" name="f_occupation" required>
+                        <label>8. Father. Occupation <span style="color:red;"></span></label>
+                        <input type="text" name="f_occupation">
                     </div>
                 </div>
 
@@ -109,48 +107,48 @@ $date = date("Y-m-d");
                         <input type="text" name="mother_name" required>
                     </div>
                     <div class="col">
-                        <label>10. Mother. Qualification <span style="color:red;">*</span></label>
-                        <input type="text" name="m_qualification" required>
+                        <label>10. Mother. Qualification <span style="color:red;"></span></label>
+                        <input type="text" name="m_qualification">
                     </div>
                     <div class="col">
-                        <label>11. Mother. Occupation <span style="color:red;">*</span></label>
-                        <input type="text" name="m_occupation" required>
+                        <label>11. Mother. Occupation <span style="color:red;"></span></label>
+                        <input type="text" name="m_occupation">
                     </div>
                 </div>
 
                 <!-- some changes here mother no merge with father and alter colom -->
                 <div class="row">
                     <div class="col">
-                        <label>12b. Father Mobile <span style="color:red;">*</span></label>
+                        <label>12. Father Mobile <span style="color:red;">*</span></label>
                         <input type="NUMBER" name="father_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)" required>
                     </div>
                     <div class="col">
-                        <label>12a. Mother Mobile <span style="color:red;"></span></label>
+                        <label>13. Mother Mobile <span style="color:red;"></span></label>
                         <input type="NUMBER" name="mother_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
                     </div>
                     <div class="row">
 
                         <div class="col">
-                            <label>12a. Whatsapp No <span style="color:red;"></span></label>
+                            <label>14. Whatsapp No <span style="color:red;"></span></label>
                             <input type="NUMBER" name="whatsapp_no" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
                         </div>
                         <div class="col">
-                            <label>12a. Emergency No <span style="color:red;"></span></label>
-                            <input type="NUMBER" name="emergency_no" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
+                            <label>15. Emergency No <span style="color:red;">*</span></label>
+                            <input type="NUMBER" name="emergency_no" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)" required>
                         </div>
                     </div>
 
                     <div class="col">
-                        <label>12c. Alternative Mobile <span style="color:red;"></span></label>
+                        <label>16. Alternative Mobile <span style="color:red;"></span></label>
                         <input type="NUMBER" name="alt_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)">
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label>13a. Guardian Name (If any)</label>
+                            <label>17. Guardian Name (If any)</label>
                             <input type="text" name="guardian_name" placeholder="Name of Guardian">
                         </div>
                         <div class="col">
-                            <label>13b. Relation with Student</label>
+                            <label>18. Relation with Student</label>
                             <select name="guardian_relation" class="modular-select">
                                 <option value="">-- Select Relation --</option>
                                 <option value="Grandfather">Grandfather</option>
@@ -162,18 +160,18 @@ $date = date("Y-m-d");
                             </select>
                         </div>
                         <div class="col">
-                            <label>13c. Guardian Mobile</label>
+                            <label>19. Guardian Mobile</label>
                             <input type="number" name="guardian_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)" placeholder="guardian Contact">
                         </div>
                         <div class="col">
-                            <label>13d. Guardian Alternate Mobile</label>
+                            <label>20. Guardian Alternate Mobile</label>
                             <input type="number" name="guardian_alt_mobile" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10)" placeholder="Alternative Contact">
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label>13e. Permanent Address <span style="color:red;">*</span></label>
+                            <label>21. Permanent Address <span style="color:red;">*</span></label>
                             <textarea name="permanent_address" id="perm_addr" rows="2" required oninput="syncAddress()"></textarea>
                         </div>
 
@@ -182,7 +180,7 @@ $date = date("Y-m-d");
                                 <input type="checkbox" id="same_as_perm" onclick="syncAddress()" style="width: 18px; height: 18px; cursor: pointer;">
                                 <label for="same_as_perm" style="margin-bottom: 0; cursor: pointer; font-weight: 600; color: #121213;">Same as Permanent Address</label>
                             </div>
-                            <label>13f. Current Address <span style="color:red;">*</span></label>
+                            <label>22. Current Address <span style="color:red;">*</span></label>
                             <textarea name="current_address" id="curr_addr" rows="2" required></textarea>
                         </div>
                     </div>
@@ -197,7 +195,7 @@ $date = date("Y-m-d");
                 </div> -->
 
                     <div class="col">
-                        <label>14. Religion <span style="color:red;">*</span></label>
+                        <label>23 Religion <span style="color:red;">*</span></label>
                         <select name="religion" class="modular-select" required>
                             <option value="">-- Select --</option>
                             <option value="Hindu">Hindu</option>
@@ -213,22 +211,22 @@ $date = date("Y-m-d");
 
                 <div class="row">
                     <div class="col">
-                        <label>15. SSSM ID <span style="color:red;">*</span></label>
+                        <label>24.Student SSSM ID <span style="color:red;">*</span></label>
                         <input type="number" name="sssm_id" oninput="if(this.value.length > 9) this.value = this.value.slice(0, 9)" required>
                     </div>
                     <div class="col">
-                        <label>16. Family ID <span style="color:red;">*</span></label>
+                        <label>25 Family ID <span style="color:red;">*</span></label>
                         <input type="number" name="family_id" oninput="if(this.value.length > 8) this.value = this.value.slice(0, 8)" required>
                     </div>
                     <div class="col">
-                        <label>17. Aadhar Number <span style="color:red;">*</span></label>
+                        <label>26. Aadhar Number <span style="color:red;">*</span></label>
                         <input type="number" name="aadhar_no" pattern="\d{12}" oninput="if(this.value.length > 12) this.value = this.value.slice(0, 12)" placeholder="XXXX-XXXX-XXXX">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <label>18. Category <span style="color:red;">*</span></label>
+                        <label>27 Category <span style="color:red;">*</span></label>
                         <select name="category" class="modular-select" required>
                             <option value="">-- Select --</option>
                             <option value="GEN">GENERAL</option>
@@ -241,11 +239,11 @@ $date = date("Y-m-d");
                         </select>
                     </div>
                     <div class="col">
-                        <label>19. Caste <span style="color:red;">*</span></label>
+                        <label>28. Caste <span style="color:red;">*</span></label>
                         <input type="text" name="caste" required>
                     </div>
                     <div class="col">
-                        <label>20.Caste Certificate No</label>
+                        <label>29.Caste Certificate No</label>
                         <input type="text" name="caste_certificate_no" placeholder="eg RS/123/123/12313131">
                     </div>
                 </div>
@@ -254,19 +252,19 @@ $date = date("Y-m-d");
                     <!-- add now 23march 26 
                  add also add in the db -->
                     <div class="col">
-                        <label>2. A/C Holder Name <span style="color:red;"></span></label>
+                        <label>30. A/C Holder Name <span style="color:red;"></span></label>
                         <input type="text" name="ac_holdername" style="text-transform:uppercase;">
                     </div>
                     <div class="col">
-                        <label>20. Bank Name <span style="color:red;"></span></label>
+                        <label>31. Bank Name <span style="color:red;"></span></label>
                         <input type="text" name="bank_name">
                     </div>
                     <div class="col">
-                        <label>21. Account No <span style="color:red;"></span></label>
+                        <label>32. Account No <span style="color:red;"></span></label>
                         <input type="text" name="account_no">
                     </div>
                     <div class="col">
-                        <label>22. IFSC Code <span style="color:red;"></span></label>
+                        <label>33. IFSC Code <span style="color:red;"></span></label>
                         <input type="text" name="ifsc_code">
                     </div>
                 </div>
@@ -276,68 +274,62 @@ $date = date("Y-m-d");
                     <h3 class="fees-header"> Fees Details (Auto-Calculated)</h3>
                     <div class="col">
                         <label><b>Admission Category (Quota) <span style="color:red;">*</span></b></label>
-                        <!-- <div class="radio-group">
-            <input type="radio" name="admission_type" value="Normal" id="type_normal" checked required> 
-            <label for="type_normal" style="margin-right: 20px; cursor:pointer;"> Normal</label>
-            
-            <input type="radio" name="admission_type" value="RTE" id="type_rte"> 
-            <label for="type_rte" style="cursor:pointer;"> RTE</label>
-        </div>
-    </div> -->
-                        <div class="radio-group">
-                            <input type="radio" name="admission_type" value="Normal" id="type_normal" onchange="handleAdmissionTypeChange()" checked required>
-                            <label for="type_normal" style="margin-right: 20px; cursor:pointer;"> Normal</label>
-
-                            <input type="radio" name="admission_type" value="RTE" id="type_rte" onchange="handleAdmissionTypeChange()">
-                            <label for="type_rte" style="cursor:pointer;"> RTE</label>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label>23. Select Class *</label>
-                                <select name="student_class" id="class_picker" onchange="applyMasterFees()" class="fees-select" required>
-                                    <option value="">-- Choose Class --</option>
-                                    <?php
-                                    $res_fees = mysqli_query($conn, "SELECT * FROM fees_master");
-                                    while ($row_f = mysqli_fetch_assoc($res_fees)) { ?>
-                                        <option value="<?php echo $row_f['class_name']; ?>" data-fees="<?php echo $row_f['standard_fees']; ?>">
-                                            <?php echo $row_f['class_name']; ?>
-                                        </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label>22. Section *</label>
-                                <select name="section" class="fees-select" required>
-                                    <option value="A">Section A</option>
-                                    <option value="B">Section B</option>
-                                    <option value="C">Section C</option>
-                                    <option value="D">Section D</option>
-                                    <option value="None">None</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="fees-summary">
-                            Standard Fees: <b>₹<span id="display_std">0</span></b> |
-                            <span class="final-price">TOTAL FEES AMT: ₹<span id="display_final">0</span></span>
-                        </div>
-                        <input type="hidden" id="hidden_std_fees" name="total_standard_fees">
-                        <input type="hidden" id="hidden_final_fees" name="final_payable_fees">
+                        <select required name="admission_type">
+                            <option>--SELECT TYPE OF ADMISSION--</option>
+                            <option value="Normal">Normal</option>
+                            <option value="RTE">RTE</option>
+                        </select>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>23. Select Class *</label>
+                            <select name="student_class" onchange=selectclass()        id="class_picker" class="fees-select" required>
+                                <option >-- Choose Class --</option>
+                                <?php $selectclass = ['Nursery', 'kg1', 'kg2', "1", '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'];
+                                $i = 0;
+                                while ($selectclass[$i]) {
+                                    echo  "<option value=$selectclass[$i]> $selectclass[$i]  </option>";
+                                    $i++;
+                                }
 
-                    <!-- foto ko optional kiya h 24 3 26  -->
-                    <div class="col" style="text-align: center;">
-                        <img id="imagePreview" src="#" alt="Preview" class="photo-preview">
-                        <button type="submit" class="btn-save">Final Save Admission</button>
+
+                                ?>
+
+                            </select>
+
+                        </div>
+                        <div class="col">
+                            <label>22. Section *</label>
+                            <select name="section" class="fees-select" required>
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                                <option value="C">Section C</option>
+                                <option value="D">Section D</option>
+                                <option value="None">None</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                                   <label>Standard fees </label>
+                    <input readonly type="number"  id="standardfees" name="total_standard_fees">
+                    
+
+                        </div>
                     </div>
+             
+                    
+
+                <!-- foto ko optional kiya h 24 3 26  -->
+                <div class="col" style="text-align: center;">
+                    <img id="imagePreview" src="#" alt="Preview" class="photo-preview">
+                    <button type="submit" class="btn-save">Final Save Admission</button>
                 </div>
             </div>
-        </form>
+    </div>
+    </form>
     </div>
 
     <script src="admission.js"></script>
 </body>
-
 
 </html>
 
