@@ -132,7 +132,7 @@ background-color: #ffffff; /* White background for form */
 .links{
     width: 65%;
 margin: auto;
-background-color: black;
+background-color: rgba(0, 0, 0, 0.899);
     margin-top: auto;
     display : flex ;
     flex-direction: row;
