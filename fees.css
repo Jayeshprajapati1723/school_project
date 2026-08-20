@@ -12,7 +12,7 @@ body{
     border : 2px solid black ;
   width: 65% ;
     margin: auto;
-    background-color: rgb(235 204 176);
+    background-color: rgb(218, 182, 151);
     padding : 30px ;
     flex-wrap: wrap;
 }
